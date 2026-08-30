@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALL MIGHT — Robótica de alto desempenho | SESI SENAI Parangaba</title>
+<meta name="description" content="ALL MIGHT: equipe de robótica da Escola SESI SENAI Parangaba (Fortaleza-CE). FRC #9162, formação em cascata FLL·WRO·FTC·FRC, projetos Ecomight e De Olho na Robótica.">
+<link rel="icon" href="logos/am-teams.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0d0f;
+  --bg-2:#16161a;
+  --card:#1d1d23;
+  --text:#f4f2ee;
+  --muted:#a3a098;
+  --orange:#f28c1e;
+  --orange-2:#ff9d33;
+  --line:#2c2c34;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+::selection{background:var(--orange);color:#0d0d0f}
+h1,h2,h3{font-family:'Archivo',sans-serif}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 5vw;background:rgba(13,13,15,.85);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+nav .logo{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:900;font-size:1.15rem;letter-spacing:.04em}
+nav .logo img{height:40px;width:auto}
+nav ul{display:flex;gap:26px;list-style:none;align-items:center}
+nav ul a{text-decoration:none;font-size:.82rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);transition:color .2s;white-space:nowrap}
+nav ul a:hover{color:var(--orange)}
+nav ul a.cta{
+  color:#0d0d0f;background:var(--orange);padding:9px 18px;border-radius:8px;
+  transition:background .2s;
+}
+nav ul a.cta:hover{background:var(--orange-2);color:#0d0d0f}
+@media(max-width:900px){nav ul{gap:16px}nav ul a{font-size:.72rem}nav ul li.hide-m{display:none}}
+@media(max-width:700px){
+  nav{padding:10px 3vw}
+  nav .logo-txt{display:none}
+  nav .logo img{height:34px}
+  nav ul{gap:9px}
+  nav ul a{font-size:.66rem;letter-spacing:.06em}
+  nav ul a.cta{padding:8px 12px}
+  .hero{background-attachment:scroll}
+}
+@media(max-width:460px){nav ul li.hide-s{display:none}}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:130px 5vw 60px;position:relative;overflow:hidden;
+  background:
+    linear-gradient(100deg, rgba(13,13,15,.82) 25%, rgba(13,13,15,.52) 55%, rgba(13,13,15,.32)),
+    linear-gradient(rgba(13,13,15,.15), rgba(13,13,15,.80) 85%),
+    url('fotos/allmight-team.jpg') center 28%/cover no-repeat fixed,
+    var(--bg);
+}
+.fam-row{
+  display:flex;gap:clamp(20px,4vw,44px);align-items:center;flex-wrap:wrap;
+  margin-top:44px;
+}
+.fam-row img{height:64px;width:auto;opacity:.9;transition:transform .2s,opacity .2s;filter:drop-shadow(0 4px 14px rgba(0,0,0,.5))}
+.fam-row img:hover{transform:translateY(-4px) scale(1.06);opacity:1}
+@media(max-width:640px){.fam-row img{height:46px}}
+.hero .grid-bg{
+  position:absolute;inset:0;pointer-events:none;opacity:.22;
+  background-image:linear-gradient(var(--line) 1px, transparent 1px),linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:10px;align-self:flex-start;
+  border:1px solid rgba(242,140,30,.4);background:rgba(242,140,30,.09);border-radius:100px;
+  padding:8px 20px;font-family:'JetBrains Mono',monospace;font-size:.72rem;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:32px;
+}
+.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 8px var(--orange),0 0 20px rgba(242,140,30,.45)}
+.hero h1{
+  font-size:clamp(3.4rem,10vw,8.5rem);font-weight:900;line-height:.95;
+  letter-spacing:-.02em;text-transform:uppercase;
+}
+.hero h1 span{background:linear-gradient(135deg,var(--orange) 0%,var(--orange-2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .sub{
+  margin-top:26px;max-width:56ch;font-size:1.1rem;color:var(--muted);
+}
+.hero .sub strong{color:var(--text)}
+.hero-cta{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap}
+.btn{
+  display:inline-block;text-decoration:none;font-weight:700;font-size:.95rem;
+  padding:15px 30px;border-radius:10px;transition:transform .15s,background .2s,border-color .2s;
+}
+.btn.solid{background:linear-gradient(135deg,var(--orange) 0%,var(--orange-2) 100%);color:#0d0d0f;border-color:transparent}
+.btn.solid:hover{filter:brightness(1.12);transform:translateY(-2px)}
+.btn.line{border:1.5px solid var(--line);color:var(--text)}
+.btn.line:hover{border-color:var(--orange);transform:translateY(-2px)}
+.hero-stats{
+  display:flex;gap:clamp(26px,6vw,70px);margin-top:70px;flex-wrap:wrap;
+  border-top:1px solid var(--line);padding-top:34px;
+}
+.hstat .n{font-family:'Archivo',sans-serif;font-weight:900;font-size:2.2rem;color:var(--orange)}
+.hstat p{font-size:.82rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+
+/* SECTIONS */
+section{padding:110px 5vw;position:relative}
+.kicker{
+  font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:.22em;color:var(--orange);
+  display:flex;align-items:center;gap:12px;margin-bottom:16px;
+}
+.kicker::before{content:'';width:30px;height:1.5px;background:linear-gradient(90deg,var(--orange),rgba(242,140,30,.25))}
+h2{font-size:clamp(2rem,4.5vw,3.8rem);font-weight:900;line-height:1.02;margin-bottom:20px;text-transform:uppercase;letter-spacing:-.03em}
+.intro{max-width:66ch;font-size:1.05rem;color:var(--muted)}
+.intro strong{color:var(--text)}
+
+/* quem somos */
+.about{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.about .split{display:grid;grid-template-columns:1.1fr .9fr;gap:5vw;align-items:center}
+@media(max-width:900px){.about .split{grid-template-columns:1fr}}
+.about .photo{
+  border-radius:16px;overflow:hidden;border:1px solid var(--line);
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+}
+.about .photo img{width:100%;height:460px;object-fit:cover}
+.about .photo figcaption{padding:14px 18px;font-size:.82rem;color:var(--muted);background:var(--card)}
+
+/* cascata / categorias */
+.cascade{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:56px}
+.step-card{
+  background:linear-gradient(160deg,rgba(242,140,30,.07) 0%,var(--card) 45%);border:1px solid var(--line);border-radius:16px;
+  padding:30px 26px;position:relative;transition:transform .2s,border-color .2s,box-shadow .2s;
+  border-top:2px solid var(--orange);
+}
+.step-card:hover{transform:translateY(-6px);border-color:var(--orange);box-shadow:0 20px 50px rgba(242,140,30,.1)}
+.step-card .lvl{
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.18em;
+  color:var(--orange);text-transform:uppercase;margin-bottom:14px;display:block;
+}
+.step-card h3{font-size:1.5rem;margin-bottom:8px;text-transform:uppercase}
+.step-card p{font-size:.9rem;color:var(--muted)}
+.step-card .age{margin-top:16px;font-size:.78rem;color:var(--orange);font-weight:600}
+
+/* projetos */
+.projects{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:56px}
+.proj{
+  background:linear-gradient(160deg,rgba(242,140,30,.07) 0%,var(--card) 40%);border:1px solid var(--line);border-radius:18px;padding:34px 30px;
+  transition:transform .2s,border-color .2s,box-shadow .2s;display:flex;flex-direction:column;gap:14px;
+  border-top:2px solid var(--orange);
+}
+.proj:hover{transform:translateY(-6px);border-color:var(--orange);box-shadow:0 20px 50px rgba(242,140,30,.1)}
+.proj .icon{
+  width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;background:rgba(242,140,30,.12);border:1px solid rgba(242,140,30,.35);
+}
+.proj h3{font-size:1.3rem;text-transform:uppercase}
+.proj p{font-size:.92rem;color:var(--muted)}
+.proj .tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+
+/* destaque RITMO */
+.ritmo-band{
+  display:grid;grid-template-columns:auto 1fr auto;gap:5vw;align-items:center;
+  background:linear-gradient(120deg, rgba(242,140,30,.12), transparent 55%), var(--card);
+  border:1px solid var(--line);border-radius:22px;padding:46px clamp(26px,5vw,60px);
+  max-width:1100px;margin:0 auto;border-top:2px solid var(--orange);
+}
+@media(max-width:820px){.ritmo-band{grid-template-columns:1fr;text-align:center;justify-items:center}}
+.ritmo-band img{height:150px;width:auto}
+.ritmo-band h3{font-size:clamp(1.5rem,3vw,2.2rem);text-transform:uppercase;margin-bottom:8px}
+.ritmo-band p{color:var(--muted);max-width:52ch}
+
+/* contato / footer */
+footer{
+  padding:90px 5vw 50px;text-align:center;border-top:1px solid rgba(242,140,30,.2);
+  background:linear-gradient(to bottom,rgba(242,140,30,.07) 0%,transparent 40%), var(--bg);
+}
+footer img.mark{height:120px;width:auto;margin:0 auto 20px}
+footer h2{margin-bottom:10px}
+footer .mail{
+  display:inline-block;font-family:'JetBrains Mono',monospace;font-size:1rem;
+  color:var(--orange);text-decoration:none;border-bottom:1.5px dashed var(--orange);
+  margin:14px 0 34px;
+}
+footer .links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:44px}
+footer .links a{
+  text-decoration:none;font-size:.85rem;font-weight:600;color:var(--muted);
+  border:1px solid var(--line);border-radius:100px;padding:10px 22px;transition:all .2s;
+}
+footer .links a:hover{color:var(--orange);border-color:var(--orange)}
+footer .fine{font-size:.8rem;color:var(--muted)}
+
+/* timeline FRC */
+.timeline{position:relative;max-width:860px;margin-top:56px}
+.timeline::before{content:'';position:absolute;left:18px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--orange),transparent);border-radius:2px}
+.tl-item{display:grid;grid-template-columns:40px 1fr;gap:22px;margin-bottom:44px;position:relative}
+.tl-dot{width:36px;height:36px;border-radius:50%;background:var(--card);border:2px solid var(--orange);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--orange);font-family:'JetBrains Mono',monospace;flex-shrink:0;z-index:1;box-shadow:0 0 0 4px var(--bg),0 0 14px rgba(242,140,30,.18)}
+.tl-dot.gold{background:linear-gradient(135deg,var(--orange),var(--orange-2));color:#0d0d0f;border-color:transparent;box-shadow:0 0 0 4px var(--bg),0 0 22px rgba(242,140,30,.5)}
+.tl-body{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+.tl-year{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.18em;color:var(--orange);text-transform:uppercase;margin-bottom:6px}
+.tl-title{font-family:'Archivo',sans-serif;font-weight:900;font-size:1.15rem;text-transform:uppercase;margin-bottom:8px}
+.tl-events{list-style:none;font-size:.88rem;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+.tl-events li{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.tl-events li span{color:var(--text);font-weight:600}
+.tl-awards{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.award-badge{background:rgba(242,140,30,.15);border:1px solid rgba(242,140,30,.4);border-radius:100px;padding:5px 14px;font-size:.74rem;font-weight:600;color:var(--orange)}
+.award-badge.gold-badge{background:rgba(242,140,30,.3);border-color:var(--orange)}
+@media(max-width:640px){.timeline::before{left:14px}.tl-dot{width:28px;height:28px;font-size:.6rem}.tl-item{grid-template-columns:32px 1fr;gap:14px}}
+
+/* patrocinadores */
+.sponsors{text-align:center}
+.sp-block{margin-bottom:48px}
+.sp-label{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+.sp-logos{display:flex;gap:clamp(28px,5vw,60px);justify-content:center;align-items:center;flex-wrap:wrap}
+.sp-logos img{height:50px;width:auto;opacity:.85;transition:opacity .2s}
+.sp-logos img:hover{opacity:1}
+.sp-logos .sesi-logo{height:38px;filter:none;opacity:.9}
+.sp-pill{background:#fff;border-radius:12px;padding:14px 28px;display:flex;align-items:center;justify-content:center;transition:opacity .2s;opacity:.85}
+.sp-pill:hover{opacity:1}
+.sp-pill img{height:64px;width:auto;opacity:1}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:640px){
+  section{padding:70px 6vw}
+  .hero{padding:110px 6vw 60px}
+  .about .photo img{height:300px}
+  .ritmo-band img{height:110px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#top"><img src="logos/allmight.png" alt="ALL MIGHT #9162"><span class="logo-txt">ALL MIGHT</span></a>
+  <ul>
+    <li class="hide-m"><a href="#quem-somos">A equipe</a></li>
+    <li class="hide-m"><a href="#categorias">Jornada FIRST</a></li>
+    <li class="hide-m"><a href="#kids">All Might Kids</a></li>
+    <li class="hide-m"><a href="#historico">FRC</a></li>
+    <li><a href="#projetos">Projetos</a></li>
+    <li class="hide-s"><a href="#contato">Contato</a></li>
+    <li><span style="color:var(--orange);border:1.5px solid var(--orange);border-radius:8px;padding:8px 16px;opacity:.55;font-size:.85rem">AVA · em breve</span></li>
+    <li><a class="cta" href="ritmo.html">Projeto RITMO ♥</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <div class="grid-bg"></div>
+  <span class="hero-badge"><span class="dot"></span>Escola SESI SENAI Parangaba · Fortaleza-CE</span>
+  <h1>ALL<br><span>MIGHT</span></h1>
+  <p class="sub">
+    Robótica de alto desempenho que forma <strong>jovens líderes</strong>.
+    Da primeira engrenagem na FLL ao palco mundial da FRC, cada estudante percorre
+    uma jornada completa de tecnologia, ciência e propósito.
+  </p>
+  <div class="hero-cta">
+    <a class="btn solid" href="#quem-somos">Sobre a equipe</a>
+    <span class="btn line" style="opacity:.5;cursor:default">🎓 Ambiente Virtual · em breve</span>
+  </div>
+  <div class="fam-row reveal">
+    <img src="logos/am-teams.png" alt="All Might Teams">
+    <img src="logos/am-fll.png" alt="All Might FLL">
+    <img src="logos/am-ftc.png" alt="All Might FTC 32576">
+    <img src="logos/allmight.png" alt="All Might FRC 9162">
+    <img src="logos/am-wro.png" alt="All Might Kids WRO">
+  </div>
+  <div class="hero-stats reveal" style="margin-top:44px">
+    <div class="hstat"><div class="n">#9162</div><p>FIRST Robotics<br>Competition</p></div>
+    <div class="hstat"><div class="n">3</div><p>níveis FIRST<br>FLL · FTC · FRC</p></div>
+    <div class="hstat"><div class="n">WRO</div><p>All Might Kids<br>World Robot Olympiad</p></div>
+    <div class="hstat"><div class="n">🌎</div><p>presença em<br>mundiais de robótica</p></div>
+  </div>
+</header>
+
+<section class="about" id="quem-somos">
+  <div style="max-width:820px">
+    <div class="reveal">
+      <img src="logos/am-teams.png" alt="Logo All Might Teams" style="height:110px;width:auto;margin-bottom:20px">
+      <p class="kicker">Quem somos</p>
+      <h2>A robótica está<br>no nosso DNA.</h2>
+      <p class="intro">
+        A ALL MIGHT é a equipe de robótica da Escola SESI SENAI Parangaba, em Fortaleza.
+        Competimos na <strong>FIRST Robotics Competition</strong> como equipe #9162 e
+        acreditamos que a robótica é uma ferramenta de transformação: nela, estudantes
+        aprendem engenharia, programação e design — mas também liderança, colaboração
+        e responsabilidade com a comunidade.
+      </p>
+      <p class="intro" style="margin-top:16px">
+        Nosso sistema funciona em <strong>cascata</strong>: os mais novos começam nas
+        categorias de entrada e crescem dentro da equipe, até chegarem às arenas
+        internacionais — sempre com um veterano ao lado e um novato aprendendo atrás.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="categorias">
+  <div class="reveal">
+    <p class="kicker">All Might Teams · Jornada FIRST</p>
+    <h2>Uma jornada em cascata</h2>
+    <p class="intro">
+      Dentro da FIRST, cada categoria é um degrau: o estudante entra criança e sai
+      preparado para os maiores desafios de engenharia do mundo.
+    </p>
+  </div>
+  <div class="cascade reveal">
+    <div class="step-card">
+      <img src="logos/am-fll.png" alt="All Might FLL" style="height:84px;width:auto;margin-bottom:16px">
+      <span class="lvl">Nível 01</span>
+      <h3>FLL</h3>
+      <p>FIRST LEGO League: o primeiro contato com robótica, pesquisa científica e trabalho em equipe.</p>
+      <p class="age">porta de entrada</p>
+    </div>
+    <div class="step-card">
+      <img src="logos/am-ftc.png" alt="All Might FTC" style="height:84px;width:auto;margin-bottom:16px">
+      <span class="lvl">Nível 02</span>
+      <h3>FTC</h3>
+      <p>FIRST Tech Challenge: robôs de competição com metal, CAD e programação avançada.</p>
+      <p class="age">nível intermediário</p>
+    </div>
+    <div class="step-card">
+      <img src="logos/allmight.png" alt="All Might FRC #9162" style="height:84px;width:auto;margin-bottom:16px">
+      <span class="lvl">Nível 03</span>
+      <h3>FRC</h3>
+      <p>FIRST Robotics Competition: a elite da robótica estudantil — robôs de grande porte, engenharia real.</p>
+      <p class="age">equipe #9162</p>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="kids">
+  <div class="split">
+    <figure class="photo reveal">
+      <img src="fotos/foto-equipe.jpg" alt="ALL MIGHT KIDS apresentando na final internacional da WRO">
+      <figcaption>ALL MIGHT KIDS na final internacional da World Robot Olympiad</figcaption>
+    </figure>
+    <div class="reveal">
+      <img src="logos/am-wro.png" alt="Logo All Might WRO" style="height:110px;width:auto;margin-bottom:20px">
+      <p class="kicker">World Robot Olympiad</p>
+      <h2>ALL MIGHT KIDS</h2>
+      <p class="intro">
+        Paralela à jornada FIRST, a <strong>ALL MIGHT KIDS</strong> é a nossa equipe de
+        <strong>WRO</strong> — a olimpíada mundial de robótica. Aqui, os mais novos criam
+        projetos autorais de inovação e já sobem em palcos internacionais representando
+        o Brasil.
+      </p>
+      <p class="intro" style="margin-top:16px">
+        A cada temporada, a equipe cria uma solução inédita para um problema real —
+        conheça os projetos logo abaixo.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="projects" id="projetos">
+  <div class="reveal">
+    <p class="kicker">Projetos de impacto</p>
+    <h2>Tecnologia com propósito</h2>
+  </div>
+  <div class="proj-grid reveal">
+    <div class="proj">
+      <div class="icon">🌱</div>
+      <span class="tag">Sustentabilidade</span>
+      <h3>Ecomight</h3>
+      <p>Consciência ambiental dentro da engenharia: nossos robôs e processos priorizam eficiência energética, reaproveitamento de materiais e responsabilidade com o planeta.</p>
+    </div>
+    <div class="proj">
+      <div class="icon">👁️</div>
+      <span class="tag">Inclusão</span>
+      <h3>De Olho na Robótica</h3>
+      <p>Acesso democrático à tecnologia: levamos oficinas e mentorias para meninas e estudantes da rede pública, porque talento existe em todo lugar — o que falta é oportunidade.</p>
+    </div>
+    <div class="proj">
+      <div class="icon">🤝</div>
+      <span class="tag">Formação</span>
+      <h3>All Might Teams</h3>
+      <p>O sistema em cascata que sustenta tudo: veteranos mentoram novatos, conhecimento não se perde e cada geração chega mais longe que a anterior.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CRONOLOGIA FRC -->
+<section class="about" id="historico">
+  <div class="reveal">
+    <p class="kicker">FRC #9162 · Histórico de competições</p>
+    <h2>4 temporadas.<br>4 prêmios.</h2>
+    <p class="intro">Da estreia em 2023 ao primeiro campeonato regional em 2026 — uma equipe pioneira do Ceará construída prêmio a prêmio.</p>
+  </div>
+  <div class="timeline reveal">
+    <div class="tl-item">
+      <div class="tl-dot">23</div>
+      <div class="tl-body">
+        <div class="tl-year">2023 · Rookie Season · CHARGED UP</div>
+        <div class="tl-title">Estreia com prêmio</div>
+        <ul class="tl-events">
+          <li>Brazil Regional <span>34º / 42 equipes</span></li>
+          <li>FRC Off-Season Brazil <span>18º / 30 equipes · Selecionada Aliança 5</span></li>
+        </ul>
+        <div class="tl-awards">
+          <span class="award-badge">🏆 Judges' Award — Brazil Regional</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">24</div>
+      <div class="tl-body">
+        <div class="tl-year">2024 · CRESCENDO</div>
+        <div class="tl-title">Crescimento no ranking</div>
+        <ul class="tl-events">
+          <li>Brazil Regional <span>24º / 55 equipes</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">25</div>
+      <div class="tl-body">
+        <div class="tl-year">2025 · REEFSCAPE · Patrocínio: ArcelorMittal</div>
+        <div class="tl-title">Prêmio de identidade visual</div>
+        <ul class="tl-events">
+          <li>Regional Brazil – Brasília <span>14º / 59 equipes</span></li>
+        </ul>
+        <div class="tl-awards">
+          <span class="award-badge">🎨 Imagery Award — Brasília</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot gold">26</div>
+      <div class="tl-body" style="border-color:var(--orange)">
+        <div class="tl-year">2026 · REBUILT · Patrocínio: ArcelorMittal</div>
+        <div class="tl-title">🥇 Primeiro campeonato regional</div>
+        <ul class="tl-events">
+          <li>Regional – Festival SESI de Educação (SP) <span>11º / 48 · <strong style="color:var(--orange)">CAMPEÃ</strong></span></li>
+          <li>Regional – SESI Osasco (SP) <span>33º / 49 equipes · Aliança 4</span></li>
+        </ul>
+        <div class="tl-awards">
+          <span class="award-badge gold-badge">🏆 Regional Winners — Festival SESI 2026</span>
+          <span class="award-badge">🎨 Imagery Award — Festival SESI 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PATROCINADORES -->
+<section class="sponsors" id="patrocinadores">
+  <div class="reveal">
+    <p class="kicker">Parceiros</p>
+    <h2>Realização &amp; Patrocínio</h2>
+  </div>
+  <div class="sp-block reveal">
+    <div class="sp-label">Realização</div>
+    <div class="sp-logos">
+      <img class="sesi-logo" src="logos/sesi.png" alt="SESI Ceará">
+    </div>
+  </div>
+  <div class="sp-block reveal">
+    <div class="sp-label">Patrocínio</div>
+    <div class="sp-logos">
+      <div class="sp-pill">
+        <img src="logos/arcelormittal.svg" alt="ArcelorMittal">
+      </div>
+      <div class="sp-pill">
+        <img src="logos/fiec.png" alt="FIEC">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="wro-projetos">
+  <div class="reveal">
+    <p class="kicker">All Might Kids · Projetos WRO</p>
+    <h2>Um projeto novo a cada temporada</h2>
+  </div>
+  <div class="proj-grid reveal" style="max-width:1000px">
+    <div class="proj">
+      <img src="fotos/habtron.jpg" alt="Robô HABTRON apresentado pela equipe na final internacional da WRO" style="border-radius:12px;height:210px;object-fit:cover;width:100%">
+      <span class="tag">WRO 2025 · Future Innovators</span>
+      <h3>HABTRON</h3>
+      <p>“Home, safe home”: e se o robô fosse o próprio habitat? Um explorador que se transforma em abrigo para ambientes extremos — apresentado na final mundial da WRO.</p>
+      <a class="btn line" href="https://www.youtube.com/watch?v=k7XAG65Udo0" target="_blank" rel="noopener" style="align-self:flex-start;margin-top:6px">▶ Assistir a apresentação</a>
+    </div>
+    <div class="proj">
+      <img src="logos/ritmo.png" alt="Logo do projeto RITMO, temporada 2026" style="height:210px;width:auto;object-fit:contain;align-self:center">
+      <span class="tag">WRO 2026 · Future Innovators</span>
+      <h3>RITMO</h3>
+      <p>“Cada coração, uma história”: a vending machine cultural que escuta o batimento cardíaco e entrega literatura de cordel.</p>
+      <a class="btn solid" href="ritmo.html" style="align-self:flex-start;margin-top:6px">Visitar o site ♥</a>
+    </div>
+  </div>
+</section>
+
+<footer id="contato">
+  <img class="mark" src="logos/allmight.png" alt="Logo ALL MIGHT #9162">
+  <h2>Vamos conversar?</h2>
+  <p class="intro" style="margin:0 auto">Parcerias, imprensa, escolas e novos integrantes.</p>
+  <a class="mail" href="mailto:contato@allmight.com.br">contato@allmight.com.br</a>
+  <div class="links">
+    <a href="https://www.allmight.com.br" target="_blank" rel="noopener">Site oficial ↗</a>
+    <a href="https://ava.allmight.com.br/login/index.php" target="_blank" rel="noopener">AVA · Ambiente Virtual ↗</a>
+    <a href="https://www.instagram.com/allmightsesi" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.youtube.com/@allmightsesi" target="_blank" rel="noopener">YouTube</a>
+    <a href="ritmo.html">Projeto RITMO ♥</a>
+  </div>
+  <p class="fine">ALL MIGHT · Escola SESI SENAI Parangaba · Fortaleza · Ceará · Brasil</p>
+</footer>
+
+<script>
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+}), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

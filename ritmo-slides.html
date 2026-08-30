@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>RITMO Slides</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#1a1410;--paper:#f6efe3;--p2:#efe5d2;
+  --red:#c1272d;--amber:#e8a33d;--teal:#1e6f68;--line:#d8cbb2;
+}
+body{background:#333;font-family:'Inter',sans-serif}
+img{display:block;object-fit:cover}
+
+.slide{width:1280px;height:720px;position:relative;overflow:hidden;margin:0 auto 2px;background:var(--paper)}
+
+/* ─── utilidades ─── */
+.kicker{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.kicker::before{content:'';width:24px;height:2px;background:var(--red)}
+.dark .kicker{color:var(--amber)}.dark .kicker::before{background:var(--amber)}
+.tag{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);padding:5px 16px;border-radius:100px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;background:var(--amber)}
+h2{font-family:'Fraunces',serif;font-weight:900;line-height:1.04}
+.snum{position:absolute;bottom:16px;right:22px;font:600 10px/1 'JetBrains Mono',monospace;color:rgba(26,20,16,.25);letter-spacing:.08em}
+.dark .snum{color:rgba(246,239,227,.2)}
+
+/* ─── SLIDE 01 CAPA ─── */
+#s01{background:var(--paper)}
+#s01 .photo{position:absolute;right:0;top:0;width:580px;height:720px}
+#s01 .photo img{width:580px;height:720px}
+#s01 .photo::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,var(--paper) 0%,transparent 60%)}
+#s01 .content{position:absolute;left:0;top:0;width:720px;height:720px;padding:60px 72px;display:flex;flex-direction:column;justify-content:center}
+#s01 .logo{height:52px;width:auto;object-fit:contain;margin-bottom:20px}
+#s01 h1{font-family:'Fraunces',serif;font-size:8rem;font-weight:900;line-height:.85;letter-spacing:-.04em;color:var(--ink);margin:14px 0 12px}
+#s01 .slogan{font-family:'Fraunces',serif;font-size:1.5rem;font-style:italic;color:var(--red);margin-bottom:14px}
+#s01 .lead{font-size:.92rem;color:#4a4036;line-height:1.65;max-width:46ch;margin-bottom:26px}
+#s01 .school{font-size:.7rem;font-family:'JetBrains Mono',monospace;font-weight:600;color:#6b5f50;letter-spacing:.06em;margin-bottom:18px}
+#s01 .logos{display:inline-flex;align-items:center;gap:14px;background:var(--ink);border-radius:10px;padding:9px 16px}
+#s01 .logos img{height:28px;width:auto;object-fit:contain}
+
+/* ─── SLIDE 02 COMO FUNCIONA ─── */
+#s02{background:var(--paper)}
+#s02 .top{padding:48px 72px 24px;border-bottom:2px solid var(--line)}
+#s02 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;flex:1;height:556px}
+.step-card{padding:40px 36px;border-right:2px solid var(--line);display:flex;flex-direction:column}
+.step-card:last-child{border-right:none}
+.step-card .icon{font-size:3rem;margin-bottom:20px}
+.step-card .num{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:600;color:var(--red);letter-spacing:.1em;margin-bottom:10px}
+.step-card h3{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;margin-bottom:12px;line-height:1.1}
+.step-card p{font-size:.85rem;color:#4a4036;line-height:1.6}
+
+/* ─── SLIDE 03 LIRA ─── */
+#s03{background:#fff}
+#s03 .left{position:absolute;left:0;top:0;width:580px;height:720px;display:grid;grid-template-rows:1fr 1fr;gap:0}
+#s03 .left img{width:580px;height:360px}
+#s03 .right{position:absolute;right:0;top:0;width:700px;height:720px;padding:32px 48px 32px 44px;display:flex;flex-direction:column;justify-content:center;border-left:2px solid var(--line)}
+#s03 .right p{font-size:.9rem;color:#4a4036;line-height:1.7;margin-bottom:16px}
+#s03 .right blockquote{font-size:.85rem;font-style:italic;color:#6b5f50;border-left:3px solid var(--red);padding-left:16px;line-height:1.55}
+#s03 .partner-logos{display:flex;flex-direction:column;gap:10px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+#s03 .partner-label{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--red)}
+#s03 .partner-imgs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;width:100%}
+#s03 .partner-imgs img{height:240px;width:100%;object-fit:contain}
+
+/* ─── SLIDE MUNDO ─── */
+#s_world{background:var(--ink);color:var(--paper);padding:38px 60px 32px;display:flex;flex-direction:column}
+#s_world .world-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;flex:1;margin-top:16px}
+.w-card{background:rgba(246,239,227,.05);border:1.5px solid rgba(246,239,227,.1);border-radius:12px;padding:16px 16px;display:flex;gap:13px;align-items:flex-start}
+.w-flag{font-size:2.4rem;line-height:1.1;flex-shrink:0}
+.w-txt strong{display:block;font-size:1.05rem;font-weight:700;color:var(--amber);margin-bottom:6px;line-height:1.2}
+.w-txt span{font-size:.93rem;color:#cfc4b0;line-height:1.4}
+
+/* ─── SLIDE 04 PARCEIROS ─── */
+#s04{background:var(--p2)}
+#s04 .top{padding:40px 72px 24px}
+#s04 .cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:0 72px 40px;height:580px}
+.pcard{background:#fff;border:2.5px solid var(--ink);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:1fr auto}
+.pcard img{width:100%;height:320px}
+.pcard .ptxt{padding:20px 22px}
+.pcard h3{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;margin-bottom:8px}
+.pcard p{font-size:.8rem;color:#4a4036;line-height:1.45}
+
+/* ─── SLIDE 05 PROBLEMA ─── */
+#s05{background:var(--ink);color:var(--paper)}
+#s05 .top{padding:40px 72px 20px}
+#s05 .body{display:grid;grid-template-columns:340px 1fr;gap:48px;padding:0 72px 48px;height:580px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-content:start;padding-top:8px}
+.stat{border:1.5px solid rgba(246,239,227,.15);border-radius:12px;padding:20px 16px}
+.stat .num{font-family:'Fraunces',serif;font-size:2.6rem;font-weight:900;line-height:1;margin-bottom:6px;color:var(--amber)}
+.stat .num.r{color:#ef6a67}.stat .num.t{color:#5fc2b8}
+.stat p{font-size:.72rem;color:#cfc4b0;line-height:1.35}
+.age-chart{padding-top:8px}
+.age-chart h3{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;color:var(--paper);margin-bottom:6px}
+.age-chart .note{font-size:.75rem;color:#cfc4b0;margin-bottom:20px;line-height:1.45}
+.age-row{margin-bottom:12px}
+.age-lbl{display:flex;justify-content:space-between;font-size:.72rem;font-weight:600;color:#cfc4b0;margin-bottom:4px}
+.age-bar{height:24px;background:rgba(255,255,255,.07);border-radius:100px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.age-fill{height:24px;border-radius:100px}
+.legend{display:flex;gap:18px;margin-top:18px}
+.legend span{display:flex;align-items:center;gap:7px;font-size:.68rem;color:#cfc4b0}
+.legend i{width:10px;height:10px;border-radius:50%;display:block;flex-shrink:0}
+
+/* ─── SLIDE 06 POR QUÊ ─── */
+#s06{background:var(--p2)}
+#s06 .body{display:grid;grid-template-columns:1fr 1fr;height:720px}
+#s06 .col{padding:60px 64px;display:flex;flex-direction:column;justify-content:center}
+#s06 .col:first-child{border-right:2px solid var(--line)}
+#s06 h2{font-size:2.8rem;margin-bottom:16px}
+#s06 p{font-size:.88rem;color:#4a4036;line-height:1.7;margin-bottom:12px}
+#s06 .why-list{list-style:none;margin-top:8px}
+#s06 .why-list li{font-size:.85rem;color:#4a4036;padding:10px 0;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:flex-start;line-height:1.4}
+#s06 .why-list li::before{content:'→';color:var(--red);font-weight:700;flex-shrink:0}
+
+/* ─── SLIDE 07 ROBÔ ─── */
+#s07{background:var(--paper)}
+#s07 .photo{position:absolute;right:0;top:0;width:460px;height:720px}
+#s07 .photo img{width:460px;height:720px}
+#s07 .photo::before{content:'';position:absolute;inset:0;background:linear-gradient(to right,var(--paper) 0%,transparent 30%);z-index:1}
+#s07 .content{position:absolute;left:0;top:0;width:860px;height:720px;padding:48px 72px;display:flex;flex-direction:column;justify-content:center}
+.spec-list{list-style:none;margin:16px 0}
+.spec-list li{display:flex;gap:14px;font-size:.83rem;border-bottom:1px solid var(--line);padding:8px 0}
+.spec-list li b{min-width:96px;font-weight:700;color:var(--teal);flex-shrink:0}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0}
+.chip{border:2px solid var(--ink);border-radius:100px;padding:4px 14px;font-size:.7rem;font-weight:600}
+.logos-row{display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid var(--line);flex-wrap:wrap}
+.logos-row img{height:28px;width:auto;object-fit:contain;background:var(--ink);border-radius:6px;padding:5px 9px}
+.logos-sep{width:1px;height:40px;background:rgba(26,20,16,.2)}
+
+/* ─── SLIDE 08 RESULTADOS ─── */
+#s08{background:var(--ink);color:var(--paper)}
+#s08 .top{padding:40px 72px 16px}
+#s08 .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:0 72px 48px;height:556px;align-content:center}
+.rcard{background:rgba(246,239,227,.06);border:1.5px solid rgba(246,239,227,.15);border-radius:16px;padding:32px 24px;display:flex;flex-direction:column;justify-content:flex-start}
+.rcard .big{font-family:'Fraunces',serif;font-size:3.2rem;font-weight:900;color:var(--amber);line-height:1;margin-bottom:14px}
+.rcard p{font-size:.8rem;color:#cfc4b0;line-height:1.45}
+
+/* ─── SLIDE 09 PESQUISA ─── */
+#s09{background:var(--paper)}
+#s09 .body{display:grid;grid-template-columns:1fr 340px;height:720px}
+#s09 .col{padding:64px 72px;display:flex;flex-direction:column;justify-content:center}
+#s09 .col:last-child{background:var(--ink);padding:64px 48px;align-items:center;justify-content:center}
+#s09 .big{font-family:'Fraunces',serif;font-size:9rem;font-weight:900;color:var(--red);line-height:1;margin-bottom:16px}
+#s09 h2{font-size:2rem;margin-bottom:12px}
+#s09 p{font-size:.88rem;color:#4a4036;line-height:1.6;margin-bottom:12px}
+#s09 .qr{width:180px;height:180px;background:rgba(246,239,227,.08);border:2px solid rgba(246,239,227,.2);border-radius:14px;display:flex;align-items:center;justify-content:center;text-align:center;margin-bottom:16px}
+#s09 .qr span{font-size:.62rem;font-family:'JetBrains Mono',monospace;color:#cfc4b0;line-height:1.7;padding:14px}
+#s09 .url{font-size:.72rem;font-family:'JetBrains Mono',monospace;color:var(--amber);text-align:center;line-height:1.5}
+
+/* ─── SLIDE 10 ACESSIBILIDADE ─── */
+#s10{background:var(--ink);color:var(--paper)}
+#s10 .body{display:grid;grid-template-columns:1fr 1fr;height:720px}
+#s10 .col{padding:60px 64px;display:flex;flex-direction:column;justify-content:center}
+#s10 .col:first-child{border-right:1px solid rgba(246,239,227,.12)}
+#s10 h2{font-size:2.4rem;margin-bottom:14px}
+#s10 p{font-size:.86rem;color:#cfc4b0;line-height:1.65;margin-bottom:12px}
+.acc-logos{display:flex;flex-wrap:wrap;gap:16px;margin-top:24px;align-items:center}
+.acc-logos img{height:44px;width:auto;object-fit:contain}
+.acc-item{display:flex;gap:14px;align-items:flex-start;margin-bottom:16px}
+.acc-item .ico{font-size:1.8rem;flex-shrink:0;margin-top:2px}
+.acc-item h4{font-size:.95rem;font-weight:700;color:var(--paper);margin-bottom:4px}
+.acc-item p{font-size:.78rem;color:#cfc4b0;line-height:1.4;margin-bottom:0}
+
+/* ─── SLIDE 11 EQUIPE ─── */
+#s11{background:var(--p2)}
+#s11 .top{padding:40px 72px 20px;border-bottom:2px solid var(--line)}
+#s11 .members{display:grid;grid-template-columns:1fr 1fr;gap:0;height:604px}
+.member{display:grid;grid-template-columns:220px 1fr;border-right:2px solid var(--line)}
+.member:last-child{border-right:none}
+.member img{width:220px;height:604px}
+.member .bio{padding:40px 36px;display:flex;flex-direction:column;justify-content:center}
+.member .role{font-size:.65rem;font-family:'JetBrains Mono',monospace;color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px}
+.member h3{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;margin-bottom:12px;line-height:1.1}
+.member p{font-size:.83rem;color:#4a4036;line-height:1.55}
+
+/* ─── SLIDE 12 GALERIA ─── */
+#s12{background:var(--ink)}
+#s12 .top{padding:36px 72px 16px}
+#s12 .top h2{color:var(--paper)}
+#s12 .grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:8px;padding:0 8px 8px;height:600px}
+#s12 .grid img{width:100%;height:100%;border-radius:6px}
+
+/* ─── SLIDE 13 FIM ─── */
+#s13{background:var(--ink);color:var(--paper)}
+#s13 .photo{position:absolute;right:0;top:0;width:500px;height:720px;opacity:.3}
+#s13 .photo img{width:500px;height:720px}
+#s13 .content{position:absolute;left:0;top:0;width:800px;height:720px;padding:80px 80px;display:flex;flex-direction:column;justify-content:center}
+#s13 .logo{height:56px;width:auto;object-fit:contain;filter:brightness(0) invert(1);margin-bottom:28px}
+#s13 h2{font-size:2.6rem;margin-bottom:18px;color:var(--paper)}
+#s13 .tagline{font-family:'Fraunces',serif;font-size:1.4rem;font-style:italic;color:var(--amber);margin-bottom:32px}
+#s13 .info{font-size:.84rem;color:#9c8878;line-height:1.9}
+#s13 .info strong{color:var(--paper)}
+#s13 .end-logos{display:flex;gap:20px;align-items:center;margin-top:26px}
+#s13 .end-logos img{height:36px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.8}
+</style>
+</head>
+<body>
+
+<!-- 01 CAPA -->
+<div class="slide" id="s01">
+  <div class="photo"><img src="fotos/foto-02.jpg" alt="RITMO"></div>
+  <div class="content">
+    <img class="logo" src="logos/ritmo.png" alt="RITMO">
+    <span class="tag">🤖 WRO 2026 · Future Innovators · Elementary</span>
+    <h1>RITMO</h1>
+    <p class="slogan">"Cada coração, uma história."</p>
+    <p class="lead">A vending machine cultural que usa o ritmo do coração para entregar literatura de cordel — de papel, verso e xilogravura.</p>
+    <p class="school">ALL MIGHT KIDS · Escola SESI SENAI Parangaba · Fortaleza, CE</p>
+    <div class="logos">
+      <img src="logos/amk.png" alt="ALL MIGHT KIDS">
+      <img src="logos/sesi.png" alt="SESI">
+      <img src="logos/wro.png" alt="WRO">
+    </div>
+  </div>
+  <span class="snum">01 / 14</span>
+</div>
+
+<!-- 02 COMO FUNCIONA -->
+<div class="slide" id="s02">
+  <div class="top">
+    <p class="kicker">O projeto</p>
+    <h2 style="font-size:2rem">Do coração ao cordel — em 4 passos.</h2>
+  </div>
+  <div class="steps">
+    <div class="step-card">
+      <div class="icon">👋</div>
+      <div class="num">PASSO 01</div>
+      <h3>Aproximação</h3>
+      <p>Sensor ultrassônico detecta a presença da pessoa e inicia as boas-vindas por instruções em áudio.</p>
+    </div>
+    <div class="step-card">
+      <div class="icon">❤️</div>
+      <div class="num">PASSO 02</div>
+      <h3>Leitura</h3>
+      <p>Sensor óptico mede o batimento cardíaco por fotopletismografia — sem nenhum contato invasivo.</p>
+    </div>
+    <div class="step-card">
+      <div class="icon">📖</div>
+      <div class="num">PASSO 03</div>
+      <h3>Seleção</h3>
+      <p>Algoritmo em Python escolhe um cordel com base no ritmo único da batida de cada pessoa.</p>
+    </div>
+    <div class="step-card">
+      <div class="icon">📜</div>
+      <div class="num">PASSO 04</div>
+      <h3>Entrega</h3>
+      <p>Servomotor libera o folheto físico com xilogravura, Braille e QR Code com narração em áudio.</p>
+    </div>
+  </div>
+  <span class="snum">02 / 14</span>
+</div>
+
+<!-- 03 LIRA NORDESTINA -->
+<div class="slide" id="s03">
+  <div class="left">
+    <img src="fotos/lira-fachada.jpg" alt="Fachada da Lira Nordestina">
+    <img src="fotos/lira-prensa.jpg" alt="Prensa tipográfica original">
+  </div>
+  <div class="right">
+    <p class="kicker" style="color:var(--red)">Referência cultural</p>
+    <h2 style="font-size:2.2rem;margin-bottom:18px">A Lira Nordestina — por que o cordel precisa ser preservado.</h2>
+    <p>A <strong>Lira Nordestina</strong>, em Juazeiro do Norte, ligada à URCA, foi uma das nossas principais referências. Com prensas originais ainda em funcionamento e acervo vivo de cordéis artesanais, o local confirmou nossa escolha: o folheto físico precisava ser o centro da solução.</p>
+    <blockquote>"Ver as prensas ainda em uso e os folhetos feitos à mão nos convenceu — o cordel é patrimônio vivo que precisa chegar às novas gerações."</blockquote>
+    <div class="partner-logos">
+      <p class="partner-label">Parcerias de validações</p>
+      <div class="partner-imgs">
+        <img src="logos/escola-poesia.jpg" alt="Escola de Poesia de Tauá">
+        <img src="logos/sac.jpg" alt="S.A.C.">
+        <img src="logos/acl.png" alt="Academia Cearense de Letras">
+        <img src="logos/urca.png" alt="URCA">
+      </div>
+    </div>
+  </div>
+  <span class="snum">03 / 14</span>
+</div>
+
+<!-- 04 TRADIÇÕES MUNDIAIS -->
+<div class="slide dark" id="s_world">
+  <p class="kicker">Diálogo com o mundo</p>
+  <h2 style="font-size:1.85rem;color:var(--paper);margin-top:6px">O cordel não está sozinho — outras culturas também preservam o popular.</h2>
+  <div class="world-grid">
+    <div class="w-card">
+      <div class="w-flag">🇯🇵</div>
+      <div class="w-txt"><strong>Japão — Haicai (Haiku)</strong><span>Poesia breve ligada à natureza e às estações. O RITMO poderia entregar pequenos haicais impressos.</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-flag">🇲🇽</div>
+      <div class="w-txt"><strong>México — Calaveritas literarias</strong><span>Versos satíricos associados ao Día de Muertos, entregues em pequenos impressos ilustrados.</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-flag">🇪🇸</div>
+      <div class="w-txt"><strong>Espanha — Romances de ciego</strong><span>Narrativas em verso difundidas oralmente e por folhetos impressos — tradição histórica popular.</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-flag">🇵🇹</div>
+      <div class="w-txt"><strong>Portugal — Cordel português</strong><span>Folhetos populares históricos pendurados em cordéis — tradição paralela ao cordel nordestino.</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-flag">🇮🇳</div>
+      <div class="w-txt"><strong>Índia — Patua / Patachitra</strong><span>Pinturas narrativas em rolos contadas com canto pelos artistas Patua de Bengala.</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-flag">🇮🇩</div>
+      <div class="w-txt"><strong>Indonésia — Wayang</strong><span>Teatro de marionetes que transmite histórias e valores culturais entre gerações.</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-flag">🇹🇷</div>
+      <div class="w-txt"><strong>Turquia — Karagöz</strong><span>Teatro de sombras tradicional com personagens e narrativas populares transmitidas oralmente.</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-flag">🇰🇷</div>
+      <div class="w-txt"><strong>Coreia — Pansori</strong><span>Tradição narrativa musical: histórias apresentadas por meio do canto e da interpretação ao vivo.</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-flag">🇬🇧</div>
+      <div class="w-txt"><strong>Reino Unido — Ballads tradicionais</strong><span>Canções narrativas que preservam histórias transmitidas entre gerações pela tradição oral.</span></div>
+    </div>
+  </div>
+  <span class="snum">04 / 14</span>
+</div>
+
+<!-- 05 PARCEIROS -->
+<div class="slide" id="s04">
+  <div class="top">
+    <p class="kicker">Quem nos ajudou</p>
+    <h2 style="font-size:2rem">Parceiros que tornaram o RITMO mais completo.</h2>
+  </div>
+  <div class="cards">
+    <div class="pcard">
+      <img src="fotos/foto-g7.jpg" alt="Academia Cearense de Letras">
+      <div class="ptxt">
+        <h3>Academia Cearense de Letras</h3>
+        <p>Conversamos com membros da Academia para validar nossa proposta cultural e garantir que o RITMO honra o cordel como patrimônio, conectando tradição com inovação.</p>
+      </div>
+    </div>
+    <div class="pcard">
+      <img src="fotos/foto-g9.jpg" alt="Instituto dos Cegos do Ceará">
+      <div class="ptxt">
+        <h3>Instituto dos Cegos do Ceará</h3>
+        <p>Testamos o RITMO com pessoas com deficiência visual. A experiência resultou em instruções em áudio, identificação em Braille nos folhetos e QR Code com narração.</p>
+      </div>
+    </div>
+  </div>
+  <span class="snum">05 / 14</span>
+</div>
+
+<!-- 05 O PROBLEMA -->
+<div class="slide dark" id="s05">
+  <div class="top">
+    <p class="kicker">O problema</p>
+    <h2 style="font-size:2rem;color:var(--paper)">O cordel continua vivo. Mas precisa encontrar as novas gerações.</h2>
+  </div>
+  <div class="body">
+    <div class="stats">
+      <div class="stat"><div class="num">180</div><p>pessoas participaram da pesquisa de campo</p></div>
+      <div class="stat"><div class="num r">28</div><p>afirmaram já ter lido um cordel na vida</p></div>
+      <div class="stat"><div class="num t">84%</div><p>nunca tiveram contato com um folheto</p></div>
+      <div class="stat"><div class="num">+60</div><p>a maioria dos leitores nas gerações mais velhas</p></div>
+    </div>
+    <div class="age-chart">
+      <h3>Os mais velhos leram. Os jovens nunca viram um folheto.</h3>
+      <p class="note">Quase todos os 28 que já leram cordel têm mais de 40 anos.</p>
+      <div class="age-row"><div class="age-lbl"><span>Até 20 anos</span><span>3 leram</span></div><div class="age-bar"><div class="age-fill" style="width:11%;background:#c1272d"></div></div></div>
+      <div class="age-row"><div class="age-lbl"><span>20 – 40 anos</span><span>poucos leram</span></div><div class="age-bar"><div class="age-fill" style="width:18%;background:#c1272d"></div></div></div>
+      <div class="age-row"><div class="age-lbl"><span>40 – 60 anos</span><span>boa parte dos 28</span></div><div class="age-bar"><div class="age-fill" style="width:58%;background:#e8a33d"></div></div></div>
+      <div class="age-row"><div class="age-lbl"><span>Acima de 60</span><span>quase todos leram</span></div><div class="age-bar"><div class="age-fill" style="width:92%;background:#1e6f68"></div></div></div>
+      <div class="legend">
+        <span><i style="background:#1e6f68"></i>Tiveram contato</span>
+        <span><i style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2)"></i>Nunca tiveram</span>
+      </div>
+    </div>
+  </div>
+  <span class="snum">06 / 14</span>
+</div>
+
+<!-- 06 POR QUÊ -->
+<div class="slide" id="s06">
+  <div class="body">
+    <div class="col">
+      <p class="kicker">Por que uma vending machine</p>
+      <h2>Por que uma máquina que entrega cordel?</h2>
+      <p>Queríamos criar uma experiência que fizesse o cordel chegar naturalmente às pessoas que nunca teriam buscado por ele.</p>
+      <ul class="why-list">
+        <li>O dispensador cria surpresa e curiosidade — a mesma que o cordel já provocou por séculos nas feiras.</li>
+        <li>O batimento cardíaco torna cada entrega única e pessoal, criando um vínculo imediato com a peça.</li>
+        <li>O folheto físico vai para casa — não some com a tela desligada.</li>
+        <li>A acessibilidade garante que ninguém fique de fora: Braille, áudio e QR Code.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <p class="kicker">ODS conectados</p>
+      <h2>Alinhado com os Objetivos de Desenvolvimento Sustentável.</h2>
+      <div style="display:flex;gap:16px;margin-top:20px;align-items:flex-start">
+        <img src="logos/ods-4.png" alt="ODS 4" style="height:72px;width:72px;object-fit:cover;border-radius:8px">
+        <div><strong style="display:block;margin-bottom:4px;font-size:.85rem">ODS 4 — Educação de Qualidade</strong><p style="font-size:.78rem;color:#4a4036;line-height:1.45">Acesso à cultura e à leitura para todos, dentro e fora da escola.</p></div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:16px;align-items:flex-start">
+        <img src="logos/ods-10.png" alt="ODS 10" style="height:72px;width:72px;object-fit:cover;border-radius:8px">
+        <div><strong style="display:block;margin-bottom:4px;font-size:.85rem">ODS 10 — Redução das Desigualdades</strong><p style="font-size:.78rem;color:#4a4036;line-height:1.45">Inclusão de pessoas com deficiência visual e de diferentes gerações.</p></div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:16px;align-items:flex-start">
+        <img src="logos/ods-11.png" alt="ODS 11" style="height:72px;width:72px;object-fit:cover;border-radius:8px">
+        <div><strong style="display:block;margin-bottom:4px;font-size:.85rem">ODS 11 — Cidades e Comunidades Sustentáveis</strong><p style="font-size:.78rem;color:#4a4036;line-height:1.45">Preservação do patrimônio cultural nordestino nas cidades.</p></div>
+      </div>
+    </div>
+  </div>
+  <span class="snum">07 / 14</span>
+</div>
+
+<!-- 07 O ROBÔ -->
+<div class="slide" id="s07">
+  <div class="photo"><img src="fotos/foto-02.jpg" alt="RITMO 2.0"></div>
+  <div class="content">
+    <p class="kicker">O robô</p>
+    <h2 style="font-size:2rem;margin-bottom:4px">RITMO 2.0</h2>
+    <ul class="spec-list">
+      <li><b>Cérebro</b><span>Raspberry Pi 3 com programa em Python</span></li>
+      <li><b>Interface</b><span>Tela 7" + alto-falantes com instruções em áudio</span></li>
+      <li><b>Presença</b><span>Sensor ultrassônico HC-SR04</span></li>
+      <li><b>Cardíaco</b><span>Sensor óptico PPG — sem contato invasivo</span></li>
+      <li><b>Entrega</b><span>2 servomotores + espirais + bandeja de saída</span></li>
+      <li><b>Estrutura</b><span>Policarbonato, alumínio e peças impressas em 3D</span></li>
+    </ul>
+    <div class="chips">
+      <span class="chip">Python</span><span class="chip">Raspberry Pi 3</span>
+      <span class="chip">Impressão 3D</span><span class="chip">Servomotores</span>
+      <span class="chip">Sensor cardíaco</span><span class="chip">Sensor ultrassônico</span>
+    </div>
+    <div class="logos-row">
+      <img src="logos/python.png" alt="Python">
+      <img src="logos/raspberry.svg" alt="Raspberry Pi" style="width:34px;height:34px">
+      <div class="logos-sep"></div>
+      <img src="logos/talkback.png" alt="TalkBack" style="border-radius:6px;width:34px;height:34px">
+      <img src="logos/inclusion-onu.png" alt="Acessibilidade">
+    </div>
+  </div>
+  <span class="snum">08 / 14</span>
+</div>
+
+<!-- 08 RESULTADOS -->
+<div class="slide dark" id="s08">
+  <div class="top">
+    <p class="kicker">Resultados dos testes</p>
+    <h2 style="font-size:2rem;color:var(--paper)">Testado, corrigido e aperfeiçoado.</h2>
+    <p style="font-size:.85rem;color:#cfc4b0;margin-top:6px">Cada falha nos ajudou a entender melhor o robô — os números mostram a evolução do RITMO 1.0 ao 2.0.</p>
+  </div>
+  <div class="cards">
+    <div class="rcard"><div class="big">94%</div><p>de acerto na entrega após ajustes: 47 de 50 entregas corretas (antes: 32 de 50)</p></div>
+    <div class="rcard"><div class="big">28/30</div><p>participantes seguiram as instruções corretamente na experiência de uso</p></div>
+    <div class="rcard"><div class="big">25</div><p>pessoas iniciaram a leitura do cordel logo após recebê-lo do RITMO</p></div>
+    <div class="rcard"><div class="big">18</div><p>acessaram a versão em áudio pelo QR Code do folheto no mesmo dia</p></div>
+  </div>
+  <span class="snum">09 / 14</span>
+</div>
+
+<!-- 09 PESQUISA -->
+<div class="slide" id="s09">
+  <div class="body">
+    <div class="col">
+      <div class="big">180</div>
+      <p class="kicker">Pesquisa ao vivo</p>
+      <h2>Você tem contato com a literatura de cordel?</h2>
+      <p>2 perguntas · menos de 1 minuto · anônimo. Veja o retrato da relação das pessoas com o cordel se formar em tempo real.</p>
+      <p style="font-size:.8rem;color:#6b5f50">Acesse em <strong>allmight.com.br/pesquisawro2026.html</strong></p>
+      <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap">
+        <div style="background:var(--p2);border:2px solid var(--ink);border-radius:10px;padding:10px 16px;font-size:.78rem;font-weight:600">📊 Resultados em tempo real</div>
+        <div style="background:var(--amber);border:2px solid var(--ink);border-radius:10px;padding:10px 16px;font-size:.78rem;font-weight:600">❤️ Anônimo · 2 perguntas</div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="qr">
+        <span>allmight.com.br/<br>pesquisawro<br>2026.html</span>
+      </div>
+      <p class="url">allmight.com.br/<br>pesquisawro2026.html</p>
+    </div>
+  </div>
+  <span class="snum">10 / 14</span>
+</div>
+
+<!-- 10 ACESSIBILIDADE -->
+<div class="slide dark" id="s10">
+  <div class="body">
+    <div class="col">
+      <p class="kicker">Acessibilidade</p>
+      <h2 style="color:var(--paper);font-size:2.4rem;margin-bottom:16px">O RITMO é para todos.</h2>
+      <p>Desde o início, projetamos o RITMO para que nenhuma pessoa fosse excluída da experiência — nem pela visão, nem pela geração, nem pelo idioma.</p>
+      <div class="acc-logos">
+        <img src="logos/talkback.png" alt="TalkBack" style="border-radius:8px;width:44px;height:44px">
+        <img src="logos/voiceover.png" alt="VoiceOver" style="border-radius:8px;width:44px;height:44px">
+        <img src="logos/inclusion-onu.png" alt="Símbolo Acessibilidade">
+      </div>
+    </div>
+    <div class="col">
+      <div class="acc-item">
+        <div class="ico">🔊</div>
+        <div><h4>Instruções em áudio</h4><p>Todo o fluxo é narrado em português — a pessoa pode usar o RITMO sem ver a tela.</p></div>
+      </div>
+      <div class="acc-item">
+        <div class="ico">⠃</div>
+        <div><h4>Braille no folheto</h4><p>O título e o autor de cada cordel são identificados em Braille na capa do folheto físico.</p></div>
+      </div>
+      <div class="acc-item">
+        <div class="ico">📱</div>
+        <div><h4>QR Code com narração</h4><p>Cada folheto tem um QR Code que abre a versão narrada do cordel — compatível com TalkBack e VoiceOver.</p></div>
+      </div>
+      <div class="acc-item">
+        <div class="ico">🤝</div>
+        <div><h4>Testado no Instituto dos Cegos</h4><p>Validamos a experiência com pessoas com deficiência visual antes de finalizar o protótipo.</p></div>
+      </div>
+    </div>
+  </div>
+  <span class="snum">11 / 14</span>
+</div>
+
+<!-- 11 EQUIPE -->
+<div class="slide" id="s11">
+  <div class="top">
+    <p class="kicker">A equipe</p>
+    <h2 style="font-size:2rem">ALL MIGHT KIDS — quem fez o RITMO acontecer.</h2>
+  </div>
+  <div class="members">
+    <div class="member">
+      <img src="fotos/foto-16.jpg" alt="Thales de Sousa Silva">
+      <div class="bio">
+        <div class="role">Designer &amp; Pesquisa</div>
+        <h3>Thales de Sousa Silva</h3>
+        <p>Desenhou a experiência do usuário, liderou a pesquisa de campo com os 180 participantes e desenvolveu toda a identidade visual do projeto.</p>
+      </div>
+    </div>
+    <div class="member">
+      <img src="fotos/foto-03.jpg" alt="Miguel Mota Melo Salviano">
+      <div class="bio">
+        <div class="role">Engenharia &amp; Programação</div>
+        <h3>Miguel Mota Melo Salviano</h3>
+        <p>Responsável pela programação em Python, integração dos sensores, montagem eletrônica e construção física do RITMO 2.0.</p>
+      </div>
+    </div>
+  </div>
+  <span class="snum">12 / 14</span>
+</div>
+
+<!-- 12 GALERIA -->
+<div class="slide" id="s12">
+  <div class="top">
+    <p class="kicker" style="color:var(--amber)">Galeria</p>
+    <h2>Bastidores do projeto.</h2>
+  </div>
+  <div class="grid">
+    <img src="fotos/foto-g10.jpg" alt="Equipe no laboratório">
+    <img src="fotos/foto-g9.jpg" alt="Instituto dos Cegos">
+    <img src="fotos/foto-g1.jpg" alt="RITMO em operação">
+    <img src="fotos/foto-g6.jpg" alt="Representando o Ceará">
+    <img src="fotos/foto-g7.jpg" alt="Academia Cearense de Letras">
+    <img src="fotos/foto-02.jpg" alt="RITMO 2.0">
+  </div>
+  <span class="snum">13 / 14</span>
+</div>
+
+<!-- 13 ENCERRAMENTO -->
+<div class="slide" id="s13">
+  <div class="photo"><img src="fotos/foto-g10.jpg" alt="Equipe"></div>
+  <div class="content">
+    <img class="logo" src="logos/ritmo.png" alt="RITMO">
+    <h2>Mais que um robô —<br>um encontro com a cultura.</h2>
+    <p class="tagline">"Cada coração, uma história."</p>
+    <div class="info">
+      <strong>ALL MIGHT KIDS</strong> · Escola SESI SENAI Parangaba · Fortaleza, CE<br>
+      WRO 2026 · Future Innovators · Elementary<br>
+      <strong>www.allmight.com.br</strong>
+    </div>
+    <div class="end-logos">
+      <img src="logos/amk.png" alt="ALL MIGHT KIDS">
+      <img src="logos/sesi.png" alt="SESI">
+      <img src="logos/wro.png" alt="WRO">
+      <img src="logos/sesi-fiec.png" alt="FIEC">
+    </div>
+  </div>
+  <span class="snum">14 / 14</span>
+</div>
+
+</body>
+</html>

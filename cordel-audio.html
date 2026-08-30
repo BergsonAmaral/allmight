@@ -1,0 +1,316 @@
+<title>Cordel em Áudio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,700;9..144,0,900;9..144,1,400;9..144,1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --paper: #f6efe3;
+  --paper2: #ede3d0;
+  --ink: #1a1410;
+  --ink2: #4a3f34;
+  --red: #c1272d;
+  --amber: #e8a33d;
+  --teal: #1e6f68;
+  --line: #d4c5ae;
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --fg2: var(--ink2);
+  --border: var(--line);
+  --card-bg: rgba(255,255,255,0.55);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #110e0b;
+    --fg: #f0e8d8;
+    --fg2: #a8967e;
+    --border: rgba(255,255,255,0.1);
+    --card-bg: rgba(255,255,255,0.04);
+    --paper2: #1e1812;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #110e0b;
+  --fg: #f0e8d8;
+  --fg2: #a8967e;
+  --border: rgba(255,255,255,0.1);
+  --card-bg: rgba(255,255,255,0.04);
+  --paper2: #1e1812;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* papel texturizado sutil */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.03 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 480px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* logo RITMO */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 48px;
+  text-decoration: none;
+  color: var(--fg);
+}
+.brand-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+.brand-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); }
+
+/* linha do coração animada */
+.heartline {
+  width: 100%;
+  margin-bottom: 36px;
+}
+.heartline svg { width: 100%; height: 40px; display: block; }
+
+/* card principal */
+.card {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 44px 36px 40px;
+  text-align: center;
+  width: 100%;
+  backdrop-filter: blur(8px);
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: var(--red);
+  border: 1.5px solid var(--red);
+  border-radius: 100px;
+  padding: 5px 14px;
+  margin-bottom: 28px;
+}
+
+.headline {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.8rem, 6vw, 2.5rem);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+  color: var(--fg);
+  margin-bottom: 18px;
+}
+.headline em {
+  font-style: italic;
+  color: var(--red);
+}
+
+.sub {
+  font-size: .9rem;
+  color: var(--fg2);
+  line-height: 1.65;
+  text-wrap: balance;
+  margin-bottom: 32px;
+}
+
+/* separador */
+.sep {
+  width: 40px;
+  height: 2px;
+  background: var(--border);
+  margin: 0 auto 28px;
+  border-radius: 2px;
+}
+
+/* recursos futuros */
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 32px;
+}
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  text-align: left;
+}
+.feature-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--red);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.feature-icon.amber { background: var(--amber); color: var(--ink); }
+.feature-icon.teal  { background: var(--teal);  color: #fff; }
+.feature-text strong { display: block; font-size: .83rem; font-weight: 600; color: var(--fg); margin-bottom: 2px; }
+.feature-text span   { font-size: .76rem; color: var(--fg2); line-height: 1.4; }
+
+/* badge em breve */
+.soon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--amber);
+  color: var(--ink);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border-radius: 100px;
+  padding: 6px 16px;
+}
+.pulse {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--ink);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .4; transform: scale(.6); }
+}
+
+/* rodapé */
+.footer {
+  margin-top: 40px;
+  text-align: center;
+  font-size: .72rem;
+  color: var(--fg2);
+  line-height: 1.7;
+}
+.footer a { color: var(--red); text-decoration: none; font-weight: 600; }
+
+/* animação da linha do coração */
+@keyframes beat {
+  0%   { stroke-dashoffset: 600; }
+  60%  { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+.hline {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: beat 2.4s ease-out forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hline { animation: none; stroke-dashoffset: 0; }
+  .pulse { animation: none; }
+}
+</style>
+
+<div class="container">
+
+  <a class="brand" href="https://www.allmight.com.br/ritmo.html" aria-label="Voltar ao RITMO">
+    <div class="brand-dot"></div>
+    <span class="brand-name">RITMO</span>
+    <div class="brand-dot"></div>
+  </a>
+
+  <!-- linha de batimento cardíaco -->
+  <div class="heartline" aria-hidden="true">
+    <svg viewBox="0 0 480 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path class="hline"
+        d="M0 20 H160 L170 20 L178 4 L186 36 L194 12 L202 28 L208 20 H320 L330 20 L338 4 L346 36 L354 12 L362 28 L368 20 H480"
+        stroke="#c1272d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <div class="card">
+    <div class="label">📜 Cordel em áudio</div>
+
+    <h1 class="headline">
+      Em breve, este cordel estará disponível em PDF <em>acessível para Áudio.</em>
+    </h1>
+
+    <p class="sub">
+      Estamos preparando uma versão acessível deste folheto — com narração em áudio,
+      texto em formato acessível e compatibilidade com leitores de tela.
+    </p>
+
+    <div class="sep"></div>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon" aria-hidden="true">🔊</div>
+        <div class="feature-text">
+          <strong>Narração em áudio</strong>
+          <span>O cordel completo lido em voz humana, em português do Nordeste.</span>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon amber" aria-hidden="true">📄</div>
+        <div class="feature-text">
+          <strong>PDF acessível</strong>
+          <span>Compatível com leitores de tela — TalkBack (Android) e VoiceOver (iOS).</span>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon teal" aria-hidden="true">♿</div>
+        <div class="feature-text">
+          <strong>Audiodescrição</strong>
+          <span>As xilogravuras e ilustrações descritas para quem não pode vê-las.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="soon-badge">
+      <div class="pulse" aria-hidden="true"></div>
+      Em breve
+    </div>
+  </div>
+
+  <footer class="footer">
+    Um projeto da <strong>ALL MIGHT KIDS</strong> para a WRO 2026.<br>
+    <a href="https://www.allmight.com.br/ritmo.html">← Voltar ao projeto RITMO</a>
+  </footer>
+
+</div>

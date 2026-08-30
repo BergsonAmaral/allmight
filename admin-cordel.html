@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Cordel · RITMO</title>
+<link rel="icon" href="logos/ritmo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1410;--paper:#f6efe3;--paper-2:#efe5d2;--red:#c1272d;--teal:#1e6f68;--amber:#e8a33d;--line:#d8cbb2;--card:#fff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;line-height:1.6}
+h1,h2,h3{font-family:'Fraunces',serif}
+input,textarea,select{font-family:inherit}
+
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.25;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ── PIN screen ── */
+.pin-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:32px;gap:20px;text-align:center}
+.pin-screen .logo{font-family:'Fraunces',serif;font-weight:900;font-size:2rem;letter-spacing:.06em}
+.pin-screen p{font-size:.9rem;color:#6b5f50}
+.pin-input{padding:14px 20px;font-size:1.1rem;border:2.5px solid var(--ink);border-radius:12px;background:var(--card);width:100%;max-width:280px;text-align:center;letter-spacing:.2em;outline:none}
+.pin-input:focus{border-color:var(--red)}
+.pin-btn{padding:14px 32px;background:var(--ink);color:var(--paper);border:none;border-radius:100px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit}
+.pin-error{font-size:.85rem;color:var(--red);display:none}
+
+/* ── Nav ── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 5vw;background:rgba(246,239,227,.92);backdrop-filter:blur(12px);border-bottom:2.5px solid var(--ink);position:sticky;top:0;z-index:100}
+.nav-logo{font-family:'Fraunces',serif;font-weight:900;font-size:1.2rem;letter-spacing:.06em;display:flex;align-items:center;gap:8px}
+.nav-logo img{height:28px}
+.nav-logo .tag{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;background:var(--red);color:#fff;padding:2px 8px;border-radius:100px}
+
+/* ── Tabs ── */
+.tabs{display:flex;border-bottom:2.5px solid var(--ink);background:var(--paper)}
+.tab{flex:1;padding:14px;text-align:center;font-size:.85rem;font-weight:700;cursor:pointer;border:none;background:none;font-family:inherit;color:#6b5f50;border-bottom:3px solid transparent;transition:color .15s}
+.tab.active{color:var(--ink);border-bottom-color:var(--red)}
+
+/* ── Layout ── */
+.main{max-width:720px;margin:0 auto;padding:40px 5vw 80px}
+.view{display:none}
+.view.active{display:block}
+
+/* ── Section heading ── */
+.section-head{margin-bottom:28px}
+.section-head .kicker{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--red);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.section-head .kicker::before{content:'';display:inline-block;width:20px;height:2px;background:var(--red)}
+.section-head h2{font-size:1.8rem;font-weight:900}
+
+/* ── Form ── */
+.form-grid{display:grid;gap:20px}
+.field label{display:block;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:7px}
+.field input[type=text], .field textarea{width:100%;padding:13px 16px;border:2.5px solid var(--ink);border-radius:12px;background:var(--card);font-size:.95rem;outline:none;transition:border-color .15s}
+.field input[type=text]:focus, .field textarea:focus{border-color:var(--red)}
+.field textarea{resize:vertical;min-height:90px}
+
+.file-field label{display:block;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:7px}
+.file-drop{border:2.5px dashed var(--line);border-radius:12px;padding:22px;text-align:center;cursor:pointer;transition:border-color .15s;position:relative}
+.file-drop:hover,.file-drop.has-file{border-color:var(--ink);border-style:solid}
+.file-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.file-drop .drop-icon{font-size:1.8rem;margin-bottom:6px}
+.file-drop .drop-label{font-size:.85rem;color:#6b5f50}
+.file-drop .file-name{font-size:.82rem;font-weight:600;color:var(--teal);margin-top:6px}
+.progress-bar{height:4px;background:var(--line);border-radius:100px;margin-top:8px;overflow:hidden;display:none}
+.progress-bar .fill{height:100%;background:var(--teal);border-radius:100px;width:0%;transition:width .3s}
+
+.btn-submit{width:100%;padding:17px;background:var(--ink);color:var(--paper);border:none;border-radius:100px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;margin-top:8px}
+.btn-submit:hover{background:#2d2520}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed}
+
+/* ── QR result ── */
+.qr-result{background:var(--card);border:2.5px solid var(--ink);border-radius:16px;padding:32px;text-align:center;display:none;margin-top:32px;box-shadow:6px 6px 0 var(--ink)}
+.qr-result h3{font-size:1.3rem;margin-bottom:4px}
+.qr-result p{font-size:.85rem;color:#6b5f50;margin-bottom:20px}
+#qr-canvas-wrap{display:flex;justify-content:center;margin-bottom:20px}
+#qr-canvas-wrap canvas{border:2.5px solid var(--ink);border-radius:8px;image-rendering:pixelated}
+.qr-url{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#6b5f50;word-break:break-all;margin-bottom:20px;padding:10px 14px;background:var(--paper-2);border-radius:8px}
+.qr-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-qr{padding:11px 22px;border:2.5px solid var(--ink);border-radius:100px;font-size:.85rem;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s}
+.btn-qr.primary{background:var(--ink);color:var(--paper)}
+.btn-qr.primary:hover{background:#2d2520}
+.btn-qr.outline{background:transparent}
+.btn-qr.outline:hover{background:var(--paper-2)}
+
+/* ── Dashboard cards ── */
+.dash-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.total-badge{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:600;padding:6px 14px;border:2px solid var(--ink);border-radius:100px;background:var(--amber)}
+
+.cordel-list{display:grid;gap:16px}
+.cordel-card{background:var(--card);border:2.5px solid var(--ink);border-radius:14px;overflow:hidden;box-shadow:4px 4px 0 var(--ink);display:grid;grid-template-columns:90px 1fr;transition:transform .15s}
+.cordel-card:hover{transform:translateY(-2px)}
+.card-cover{background:var(--paper-2);aspect-ratio:3/4;object-fit:cover;width:90px;display:block}
+.card-cover-placeholder{width:90px;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;font-size:2rem;background:var(--paper-2)}
+.card-body{padding:16px;display:flex;flex-direction:column;gap:8px}
+.card-title{font-family:'Fraunces',serif;font-weight:900;font-size:1rem;line-height:1.2}
+.card-autor{font-size:.78rem;color:#6b5f50}
+.card-stats{display:flex;gap:14px;margin-top:2px}
+.stat{font-size:.78rem;font-weight:600;display:flex;align-items:center;gap:4px}
+.stat.read{color:var(--red)}
+.stat.audio{color:var(--teal)}
+.card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+.btn-card{padding:7px 14px;border:2px solid var(--ink);border-radius:100px;font-size:.75rem;font-weight:700;cursor:pointer;font-family:inherit;background:transparent;transition:background .15s}
+.btn-card:hover{background:var(--paper-2)}
+.btn-card.del:hover{background:#fde8e8;border-color:var(--red);color:var(--red)}
+
+/* QR mini modal */
+.modal-bg{position:fixed;inset:0;background:rgba(26,20,16,.6);z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;display:none}
+.modal-bg.open{display:flex}
+.modal{background:var(--card);border:2.5px solid var(--ink);border-radius:16px;padding:28px;max-width:340px;width:100%;text-align:center;box-shadow:6px 6px 0 var(--ink)}
+.modal h3{font-size:1.1rem;margin-bottom:4px}
+.modal p{font-size:.82rem;color:#6b5f50;margin-bottom:16px}
+.modal #modal-qr{display:flex;justify-content:center;margin-bottom:16px}
+.modal #modal-qr canvas{border:2px solid var(--ink);border-radius:6px}
+.modal .modal-url{font-family:'JetBrains Mono',monospace;font-size:.68rem;word-break:break-all;padding:8px 12px;background:var(--paper-2);border-radius:8px;margin-bottom:16px}
+.modal-close{padding:10px 24px;border:2.5px solid var(--ink);border-radius:100px;font-size:.85rem;font-weight:700;cursor:pointer;font-family:inherit;background:var(--paper)}
+
+/* Empty state */
+.empty{text-align:center;padding:48px 24px;color:#6b5f50;font-size:.9rem}
+.empty .ico{font-size:3rem;margin-bottom:12px}
+.empty p{font-size:.9rem}
+
+/* Loading spinner inline */
+.spinner-sm{width:18px;height:18px;border:2.5px solid rgba(246,239,227,.3);border-top-color:var(--paper);border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:500px){.cordel-card{grid-template-columns:70px 1fr}.card-cover{width:70px}}
+</style>
+</head>
+<body>
+
+<!-- PIN screen -->
+<div id="pin-screen" class="pin-screen">
+  <div class="logo">RITMO</div>
+  <p>Área restrita · ALL MIGHT KIDS</p>
+  <input id="pin-input" class="pin-input" type="password" placeholder="••••••••" maxlength="20" autocomplete="off">
+  <div id="pin-error" class="pin-error">PIN incorreto. Tente novamente.</div>
+  <button class="pin-btn" onclick="checkPin()">Entrar</button>
+</div>
+
+<!-- Admin app (hidden until PIN ok) -->
+<div id="app" style="display:none">
+  <nav>
+    <div class="nav-logo">
+      <img src="logos/ritmo.png" alt="" onerror="this.style.display='none'">
+      RITMO <span class="tag">admin</span>
+    </div>
+    <a href="ritmo.html" style="font-size:.8rem;font-weight:600;text-decoration:none;opacity:.7">← Voltar ao site</a>
+  </nav>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('cadastrar', this)">+ Cadastrar cordel</button>
+    <button class="tab" onclick="switchTab('painel', this)">📊 Painel de impacto</button>
+  </div>
+
+  <div class="main">
+
+    <!-- ── CADASTRAR ── -->
+    <div id="view-cadastrar" class="view active">
+      <div class="section-head">
+        <div class="kicker">Novo cordel</div>
+        <h2>Cadastrar cordel</h2>
+      </div>
+
+      <form id="form-cordel" class="form-grid" onsubmit="submitCordel(event)">
+        <div class="field">
+          <label>Título *</label>
+          <input type="text" id="f-titulo" placeholder="Ex: A chegada de Lampião" required>
+        </div>
+        <div class="field">
+          <label>Autor *</label>
+          <input type="text" id="f-autor" placeholder="Ex: Leandro Gomes de Barros" required>
+        </div>
+        <div class="field">
+          <label>Curiosidade <span style="font-size:.75rem;font-weight:400;text-transform:none;letter-spacing:0;color:#6b5f50">(opcional — aparece na página do leitor)</span></label>
+          <textarea id="f-curiosidade" placeholder="Ex: Este cordel foi publicado em 1906 e está entre os mais vendidos da história da literatura de cordel nordestina."></textarea>
+        </div>
+        <div class="file-field">
+          <label>Capa <span style="font-size:.75rem;font-weight:400;text-transform:none;letter-spacing:0;color:#6b5f50">(imagem JPG ou PNG)</span></label>
+          <div class="file-drop" id="drop-capa" onclick="document.getElementById('f-capa').click()">
+            <div class="drop-icon">🖼</div>
+            <div class="drop-label">Clique para escolher a capa</div>
+            <div class="file-name" id="name-capa" style="display:none"></div>
+            <input type="file" id="f-capa" accept="image/*" style="display:none" onchange="previewFile('f-capa','name-capa','drop-capa')">
+          </div>
+          <div class="progress-bar" id="prog-capa"><div class="fill" id="prog-capa-fill"></div></div>
+        </div>
+        <div class="file-field">
+          <label>Áudio <span style="font-size:.75rem;font-weight:400;text-transform:none;letter-spacing:0;color:#6b5f50">(MP3, M4A ou WAV)</span></label>
+          <div class="file-drop" id="drop-audio" onclick="document.getElementById('f-audio').click()">
+            <div class="drop-icon">🎵</div>
+            <div class="drop-label">Clique para escolher o áudio</div>
+            <div class="file-name" id="name-audio" style="display:none"></div>
+            <input type="file" id="f-audio" accept="audio/*" style="display:none" onchange="previewFile('f-audio','name-audio','drop-audio')">
+          </div>
+          <div class="progress-bar" id="prog-audio"><div class="fill" id="prog-audio-fill"></div></div>
+        </div>
+        <button type="submit" id="btn-submit" class="btn-submit">Cadastrar cordel e gerar QR Code</button>
+      </form>
+
+      <div id="qr-result" class="qr-result">
+        <h3 id="qr-titulo"></h3>
+        <p>QR Code gerado com sucesso! Imprima e cole junto ao cordel.</p>
+        <div id="qr-canvas-wrap"></div>
+        <div id="qr-url" class="qr-url"></div>
+        <div class="qr-actions">
+          <button class="btn-qr primary" onclick="downloadQR()">⬇ Baixar QR PNG</button>
+          <button class="btn-qr outline" onclick="copyUrl()">🔗 Copiar link</button>
+          <button class="btn-qr outline" onclick="resetForm()">+ Cadastrar outro</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PAINEL ── -->
+    <div id="view-painel" class="view">
+      <div class="dash-header">
+        <div class="section-head" style="margin:0">
+          <div class="kicker">Impacto</div>
+          <h2>Painel de cordeis</h2>
+        </div>
+        <div id="total-badge" class="total-badge">— cordeis</div>
+      </div>
+      <div id="cordel-list" class="cordel-list">
+        <div class="empty"><div class="ico">📖</div><p>Carregando…</p></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- QR Modal -->
+<div id="modal-bg" class="modal-bg" onclick="closeModal(event)">
+  <div class="modal">
+    <h3 id="modal-titulo"></h3>
+    <p>Escaneie ou baixe para imprimir</p>
+    <div id="modal-qr"></div>
+    <div id="modal-url" class="modal-url"></div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn-qr primary" onclick="downloadModalQR()">⬇ Baixar PNG</button>
+      <button class="modal-close" onclick="closeModal()">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script>
+const SB_URL  = 'https://sqvtpdtuspkagkwmgqme.supabase.co';
+const SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxdnRwZHR1c3BrYWdrd21ncW1lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxOTYxNjAsImV4cCI6MjA5MTc3MjE2MH0.WteQyjBA-bq8ikre_HZ_nJM5HI5_ebvJWBa3vghAwOw';
+const BUCKET  = 'cordel-assets';
+const PIN     = 'allmight2026';
+const BASE_URL = 'https://www.allmight.com.br/cordel.html';
+
+const sb = supabase.createClient(SB_URL, SB_KEY);
+const $  = id => document.getElementById(id);
+
+let lastQrUrl = '';
+let lastQrCanvas = null;
+let modalQrCanvas = null;
+
+// ── PIN ──
+if (sessionStorage.getItem('admin_ok') === '1') showApp();
+
+$('pin-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkPin(); });
+
+function checkPin() {
+  if ($('pin-input').value === PIN) {
+    sessionStorage.setItem('admin_ok', '1');
+    showApp();
+  } else {
+    $('pin-error').style.display = 'block';
+    $('pin-input').value = '';
+    $('pin-input').focus();
+  }
+}
+
+function showApp() {
+  $('pin-screen').style.display = 'none';
+  $('app').style.display = 'block';
+}
+
+// ── Tabs ──
+function switchTab(view, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  $('view-' + view).classList.add('active');
+  if (view === 'painel') loadPainel();
+}
+
+// ── File preview ──
+function previewFile(inputId, nameId, dropId) {
+  const file = $(inputId).files[0];
+  if (!file) return;
+  $(nameId).textContent = file.name;
+  $(nameId).style.display = 'block';
+  $(dropId).classList.add('has-file');
+}
+
+// ── Upload helper ──
+async function uploadFile(file, folder, progressBarId) {
+  const ext  = file.name.split('.').pop();
+  const path = folder + '/' + Date.now() + '_' + Math.random().toString(36).slice(2) + '.' + ext;
+  const bar  = $(progressBarId);
+  const fill = $(progressBarId + '-fill');
+  bar.style.display = 'block';
+  fill.style.width  = '30%';
+
+  const { data, error } = await sb.storage.from(BUCKET).upload(path, file, { upsert: false });
+  if (error) throw error;
+
+  fill.style.width = '100%';
+  setTimeout(() => { bar.style.display = 'none'; fill.style.width = '0%'; }, 600);
+
+  const { data: pub } = sb.storage.from(BUCKET).getPublicUrl(path);
+  return pub.publicUrl;
+}
+
+// ── Submit ──
+async function submitCordel(e) {
+  e.preventDefault();
+  const btn = $('btn-submit');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner-sm"></span> Enviando…';
+
+  try {
+    const titulo      = $('f-titulo').value.trim();
+    const autor       = $('f-autor').value.trim();
+    const curiosidade = $('f-curiosidade').value.trim();
+    const capaFile    = $('f-capa').files[0];
+    const audioFile   = $('f-audio').files[0];
+
+    let capa_url  = null;
+    let audio_url = null;
+
+    if (capaFile)  capa_url  = await uploadFile(capaFile,  'capas',  'prog-capa');
+    if (audioFile) audio_url = await uploadFile(audioFile, 'audios', 'prog-audio');
+
+    const { data, error } = await sb.from('cordeis').insert({
+      titulo, autor,
+      curiosidade: curiosidade || null,
+      capa_url,
+      audio_url
+    }).select().single();
+
+    if (error) throw error;
+
+    // Show QR
+    const url = BASE_URL + '?id=' + data.id;
+    lastQrUrl = url;
+    $('qr-titulo').textContent = titulo;
+    $('qr-url').textContent = url;
+    $('qr-canvas-wrap').innerHTML = '';
+    const qr = new QRCode($('qr-canvas-wrap'), {
+      text: url, width: 220, height: 220,
+      colorDark: '#1a1410', colorLight: '#f6efe3', correctLevel: QRCode.CorrectLevel.H
+    });
+    setTimeout(() => { lastQrCanvas = $('qr-canvas-wrap').querySelector('canvas'); }, 100);
+    $('qr-result').style.display = 'block';
+    $('qr-result').scrollIntoView({ behavior: 'smooth' });
+
+  } catch (err) {
+    alert('Erro ao cadastrar: ' + (err.message || err));
+    btn.disabled = false;
+    btn.innerHTML = 'Cadastrar cordel e gerar QR Code';
+  }
+}
+
+function downloadQR() {
+  if (!lastQrCanvas) return;
+  const a = document.createElement('a');
+  a.download = 'qr-cordel.png';
+  a.href = lastQrCanvas.toDataURL('image/png');
+  a.click();
+}
+
+function copyUrl() {
+  navigator.clipboard.writeText(lastQrUrl).then(() => alert('Link copiado!')).catch(() => prompt('Copie o link:', lastQrUrl));
+}
+
+function resetForm() {
+  $('form-cordel').reset();
+  ['drop-capa','drop-audio'].forEach(id => $(id) && $(id).classList.remove('has-file'));
+  ['name-capa','name-audio'].forEach(id => { if($(id)) $(id).style.display='none'; });
+  $('qr-result').style.display = 'none';
+  $('btn-submit').disabled = false;
+  $('btn-submit').innerHTML = 'Cadastrar cordel e gerar QR Code';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Painel ──
+async function loadPainel() {
+  $('cordel-list').innerHTML = '<div class="empty"><div class="ico">📖</div><p>Carregando…</p></div>';
+
+  const [{ data: cordeis }, { data: eventos }] = await Promise.all([
+    sb.from('cordeis').select('*').order('criado_em', { ascending: false }),
+    sb.from('eventos_cordel').select('cordel_id, tipo')
+  ]);
+
+  if (!cordeis || cordeis.length === 0) {
+    $('total-badge').textContent = '0 cordeis';
+    $('cordel-list').innerHTML = '<div class="empty"><div class="ico">📖</div><p>Nenhum cordel cadastrado ainda.<br>Clique em "+ Cadastrar cordel" para começar.</p></div>';
+    return;
+  }
+
+  $('total-badge').textContent = cordeis.length + (cordeis.length === 1 ? ' cordel' : ' cordeis');
+
+  const counts = {};
+  (eventos || []).forEach(ev => {
+    if (!counts[ev.cordel_id]) counts[ev.cordel_id] = { leitura: 0, audio: 0 };
+    counts[ev.cordel_id][ev.tipo] = (counts[ev.cordel_id][ev.tipo] || 0) + 1;
+  });
+
+  $('cordel-list').innerHTML = '';
+  cordeis.forEach(c => {
+    const st  = counts[c.id] || { leitura: 0, audio: 0 };
+    const url = BASE_URL + '?id=' + c.id;
+    const card = document.createElement('div');
+    card.className = 'cordel-card';
+    card.innerHTML = (c.capa_url
+      ? '<img class="card-cover" src="'+c.capa_url+'" alt="capa" loading="lazy">'
+      : '<div class="card-cover-placeholder">📖</div>') +
+      '<div class="card-body">' +
+        '<div class="card-title">' + esc(c.titulo) + '</div>' +
+        '<div class="card-autor">por ' + esc(c.autor) + '</div>' +
+        '<div class="card-stats">' +
+          '<span class="stat read">📖 ' + st.leitura + (st.leitura === 1 ? ' leitura' : ' leituras') + '</span>' +
+          (c.audio_url ? '<span class="stat audio">🎵 ' + st.audio + (st.audio === 1 ? ' áudio' : ' áudios') + '</span>' : '') +
+        '</div>' +
+        '<div class="card-actions">' +
+          '<button class="btn-card" onclick="openModal(\''+c.id+'\',\''+esc(c.titulo).replace(/'/g,'\\\'')+'\')" >Ver QR</button>' +
+          '<button class="btn-card del" onclick="deleteCordel(\''+c.id+'\', this)">Excluir</button>' +
+        '</div>' +
+      '</div>';
+    $('cordel-list').appendChild(card);
+  });
+}
+
+function esc(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Modal ──
+function openModal(id, titulo) {
+  const url = BASE_URL + '?id=' + id;
+  $('modal-titulo').textContent = titulo;
+  $('modal-url').textContent = url;
+  $('modal-qr').innerHTML = '';
+  modalQrCanvas = null;
+  const qr = new QRCode($('modal-qr'), {
+    text: url, width: 200, height: 200,
+    colorDark: '#1a1410', colorLight: '#f6efe3', correctLevel: QRCode.CorrectLevel.H
+  });
+  setTimeout(() => { modalQrCanvas = $('modal-qr').querySelector('canvas'); }, 100);
+  $('modal-bg').classList.add('open');
+}
+
+function downloadModalQR() {
+  if (!modalQrCanvas) return;
+  const a = document.createElement('a');
+  a.download = 'qr-cordel.png';
+  a.href = modalQrCanvas.toDataURL('image/png');
+  a.click();
+}
+
+function closeModal(e) {
+  if (!e || e.target === $('modal-bg') || e.target.classList.contains('modal-close'))
+    $('modal-bg').classList.remove('open');
+}
+
+// ── Delete ──
+async function deleteCordel(id, btn) {
+  if (!confirm('Excluir este cordel e todos os registros de leitura?\nEsta ação não pode ser desfeita.')) return;
+  btn.disabled = true;
+  const { error } = await sb.from('cordeis').delete().eq('id', id);
+  if (error) { alert('Erro ao excluir.'); btn.disabled = false; return; }
+  loadPainel();
+}
+</script>
+</body>
+</html>

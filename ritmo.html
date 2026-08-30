@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RITMO — Cada coração, uma história | ALL MIGHT KIDS · WRO 2026</title>
+<meta name="description" content="RITMO: a vending machine cultural que usa o ritmo do coração para entregar literatura de cordel. Projeto da equipe ALL MIGHT KIDS, Escola SESI SENAI Parangaba, para a WRO 2026.">
+<meta name="theme-color" content="#f6efe3">
+<link rel="icon" href="logos/ritmo.png">
+<link rel="icon" type="image/png" href="logos/ritmo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1410;
+  --paper:#f6efe3;
+  --paper-2:#efe5d2;
+  --red:#c1272d;
+  --red-dark:#8e1c21;
+  --amber:#e8a33d;
+  --teal:#1e6f68;
+  --line:#d8cbb2;
+  --shadow:0 20px 60px rgba(26,20,16,.18);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{overflow-x:hidden;
+  font-family:'Inter',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.7;
+  overflow-x:hidden;
+}
+::selection{background:var(--red);color:var(--paper)}
+h1,h2,h3,.serif{font-family:'Fraunces',serif}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+/* textura de papel */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.35;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============ NAV ============ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 5vw;
+  background:rgba(246,239,227,.9);backdrop-filter:blur(12px);
+  border-bottom:2px solid var(--ink);
+}
+nav .logo{font-family:'Fraunces',serif;font-weight:900;font-size:1.4rem;letter-spacing:.06em;display:flex;align-items:center;gap:10px;text-decoration:none}
+nav .logo svg{width:34px;height:22px}
+nav ul{display:flex;gap:26px;list-style:none}
+nav ul a{text-decoration:none;font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;position:relative}
+nav ul a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--red);transition:width .25s}
+nav ul a:hover::after{width:100%}
+nav ul a{white-space:nowrap}
+.menu-btn{display:none;background:none;border:2px solid var(--ink);border-radius:8px;padding:6px 12px;font-size:1.15rem;cursor:pointer;line-height:1;color:var(--ink)}
+@media(max-width:1350px){nav ul{gap:18px}nav ul a{font-size:.78rem}}
+@media(max-width:1150px){nav ul{gap:12px}nav ul a{font-size:.72rem}}
+@media(max-width:820px){
+  .menu-btn{display:block}
+  nav ul{
+    display:none;position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;gap:0;background:var(--paper);
+    border-bottom:2px solid var(--ink);padding:8px 0;
+  }
+  nav ul.open{display:flex}
+  nav ul li{width:100%}
+  nav ul a{display:block;padding:14px 6vw;font-size:.9rem}
+  nav ul a::after{display:none}
+}
+
+/* ============ HERO ============ */
+.hero{
+  min-height:100vh;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;
+  gap:4vw;padding:120px 5vw 60px;position:relative;overflow:hidden;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  border:2px solid var(--ink);padding:6px 14px;border-radius:100px;
+  font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+  background:var(--amber);box-shadow:3px 3px 0 var(--ink);margin-bottom:24px;
+}
+.hero h1{
+  font-size:clamp(4rem,11vw,9.5rem);font-weight:900;line-height:.92;
+  letter-spacing:-.02em;
+}
+.hero h1 .stroke{
+  color:transparent;-webkit-text-stroke:2.5px var(--ink);
+}
+.hero .slogan{
+  font-family:'Fraunces',serif;font-size:clamp(1.4rem,2.6vw,2.1rem);
+  font-weight:600;font-style:italic;color:var(--red);margin:18px 0 22px;
+}
+.hero p.lead{max-width:52ch;font-size:1.05rem;color:#4a4036}
+.hero-cta{display:flex;gap:16px;margin-top:34px;flex-wrap:wrap}
+.btn{
+  display:inline-block;text-decoration:none;font-weight:700;font-size:.95rem;
+  padding:14px 28px;border:2px solid var(--ink);border-radius:10px;
+  box-shadow:4px 4px 0 var(--ink);transition:transform .15s,box-shadow .15s;
+}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn.primary{background:var(--red);color:#fff}
+.btn.ghost{background:var(--paper)}
+.hero-img{position:relative}
+.hero-img .frame{
+  border:3px solid var(--ink);border-radius:18px;overflow:hidden;
+  box-shadow:var(--shadow);transform:rotate(2deg);
+  background:#fff;
+}
+.hero-img .frame img{width:100%;height:min(72vh,640px);object-fit:cover}
+.hero-img .badge{
+  position:absolute;bottom:-22px;left:-22px;
+  background:var(--teal);color:var(--paper);border:2.5px solid var(--ink);
+  border-radius:14px;padding:12px 20px;font-weight:700;
+  box-shadow:5px 5px 0 var(--ink);transform:rotate(-3deg);
+  font-family:'Fraunces',serif;font-size:1.05rem;
+}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:110px}.hero-img{max-width:440px}}
+
+/* ECG line */
+.ecg-wrap{position:absolute!important;left:0;right:0;bottom:0;height:90px;overflow:hidden;opacity:.9}
+.ecg-wrap svg{width:200%;height:100%;animation:ecgmove 9s linear infinite;display:block}
+@keyframes ecgmove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ecg-path{fill:none;stroke:var(--red);stroke-width:2.5}
+
+/* marca d'água xilogravura */
+.wm{position:absolute;pointer-events:none;user-select:none;z-index:0}
+.hero .wm{right:-60px;bottom:60px;width:min(34vw,420px);opacity:.07;transform:rotate(8deg)}
+.dark .wm{right:4vw;bottom:-40px;width:300px;opacity:.10;transform:rotate(-6deg)}
+.why .wm{right:5vw;top:80px;width:340px;opacity:.09}
+footer{position:relative;overflow:hidden}
+footer .wm{left:-40px;bottom:-50px;width:280px;opacity:.10;transform:rotate(-8deg)}
+#lira .wm{right:2vw;top:60px;width:320px;opacity:.06;transform:rotate(5deg)}
+section>*:not(.wm),.hero>*:not(.wm){position:relative;z-index:1}
+@media(max-width:640px){.hero .wm{width:52vw;right:-30px;bottom:20px}.why .wm{width:220px;top:auto;bottom:10px}}
+
+/* ============ SECTIONS ============ */
+section{padding:100px 5vw;position:relative}
+.kicker{
+  font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.2em;
+  color:var(--red);display:flex;align-items:center;gap:12px;margin-bottom:14px;
+}
+.kicker::before{content:'';width:34px;height:2.5px;background:var(--red)}
+h2{font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:900;line-height:1.08;margin-bottom:22px;letter-spacing:-.01em}
+.section-intro{max-width:68ch;font-size:1.08rem;color:#3f362c}
+
+/* problema — dark */
+.dark{background:var(--ink);color:var(--paper)}
+.dark .section-intro{color:#cfc4b0}
+.dark .kicker{color:var(--amber)}
+.dark .kicker::before{background:var(--amber)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px;margin-top:56px}
+.stat{
+  border:2px solid rgba(246,239,227,.25);border-radius:16px;padding:30px 26px;
+  background:rgba(246,239,227,.04);
+}
+.stat .num{font-family:'Fraunces',serif;font-size:clamp(2.6rem,4.5vw,3.8rem);font-weight:900;color:var(--amber);line-height:1}
+.stat .num.red{color:#ef6a67}
+.stat .num.teal{color:#5fc2b8}
+.stat p{margin-top:10px;font-size:.92rem;color:#cfc4b0}
+
+/* por que vending machine */
+.why{background:var(--paper-2);overflow:hidden}
+.why .split{align-items:start}
+.why-text p{margin-top:18px;font-size:1.05rem;color:#3f362c;max-width:58ch}
+.why-text p strong{color:var(--red-dark)}
+.pull-quote{
+  margin:90px auto 0;max-width:900px;text-align:center;position:relative;
+}
+.pull-quote blockquote{
+  font-family:'Fraunces',serif;font-weight:900;font-style:italic;
+  font-size:clamp(1.7rem,3.6vw,2.9rem);line-height:1.25;letter-spacing:-.01em;
+}
+.pull-quote blockquote em{color:var(--red);font-style:italic}
+.pull-quote .hearts{font-size:1.6rem;color:var(--red);margin-bottom:18px;display:block}
+
+/* ===== coração e o verso ===== */
+.poetica{background:var(--ink);color:var(--paper);overflow:hidden}
+.poetica .kicker{color:var(--amber)}
+.poetica .kicker::before{background:var(--amber)}
+.poetica .section-intro{color:#cfc4b0}
+.pulse-stage{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  min-height:420px;
+}
+.pulse-heart{
+  font-size:5.5rem;z-index:3;color:var(--red);animation:beat 1.1s ease-in-out infinite;
+  filter:drop-shadow(0 0 30px rgba(193,39,45,.55));
+}
+.pulse-ring{
+  position:absolute;border:2px solid var(--red);border-radius:50%;
+  width:120px;height:120px;opacity:0;animation:ring 2.2s ease-out infinite;
+}
+.pulse-ring:nth-child(2){animation-delay:.55s}
+.pulse-ring:nth-child(3){animation-delay:1.1s}
+.pulse-ring:nth-child(4){animation-delay:1.65s}
+@keyframes ring{0%{transform:scale(.6);opacity:.8}100%{transform:scale(4.2);opacity:0}}
+.bpm-label{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  font-family:'JetBrains Mono',monospace;font-size:.85rem;letter-spacing:.2em;
+  color:var(--amber);text-transform:uppercase;
+}
+.verse-box{
+  border-left:3px solid var(--red);padding:10px 0 10px 30px;margin-top:36px;
+}
+.verse-box .line{
+  font-family:'Fraunces',serif;font-style:italic;font-size:clamp(1.25rem,2.2vw,1.7rem);
+  line-height:1.75;opacity:0;transform:translateY(8px);
+  animation:verse 9.6s ease-in-out infinite;
+}
+.verse-box .line:nth-child(1){animation-delay:0s}
+.verse-box .line:nth-child(2){animation-delay:.8s}
+.verse-box .line:nth-child(3){animation-delay:1.6s}
+.verse-box .line:nth-child(4){animation-delay:2.4s}
+.verse-box .line:nth-child(5){animation-delay:3.2s}
+.verse-box .line:nth-child(6){animation-delay:4s}
+@keyframes verse{
+  0%{opacity:0;transform:translateY(8px)}
+  8%,72%{opacity:1;transform:none}
+  85%,100%{opacity:0;transform:translateY(-6px)}
+}
+.verse-credit{margin-top:14px;font-size:.8rem;color:#a89a82;font-family:'JetBrains Mono',monospace;letter-spacing:.08em}
+/* ===== consumo × arte ===== */
+.contra{padding:0;display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+@media(max-width:900px){.contra{grid-template-columns:1fr}}
+.contra-half{padding:90px 5vw;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.contra-half.consumo{background:#232323;color:#e9e2d4}
+.contra-half.arte{background:var(--red);color:var(--paper)}
+.contra-half .label{
+  font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.22em;
+  text-transform:uppercase;opacity:.75;margin-bottom:16px;
+}
+.contra-half h3{font-size:clamp(1.7rem,3vw,2.5rem);font-weight:900;line-height:1.15;margin-bottom:16px}
+.contra-half p{max-width:44ch;font-size:1rem;opacity:.92}
+.contra-half .words{margin-top:26px;display:flex;gap:10px;flex-wrap:wrap}
+.contra-half .words span{
+  border:1.5px solid currentColor;border-radius:100px;padding:5px 16px;
+  font-size:.8rem;font-weight:600;letter-spacing:.06em;opacity:.85;
+}
+.contra-verdict{
+  grid-column:1/-1;background:var(--ink);color:var(--paper);text-align:center;
+  padding:70px 6vw;border-top:3px solid var(--red);
+}
+.contra-verdict blockquote{
+  font-family:'Fraunces',serif;font-weight:900;font-style:italic;
+  font-size:clamp(1.6rem,3.4vw,2.7rem);line-height:1.3;max-width:900px;margin:0 auto;
+}
+.contra-verdict em{color:var(--amber);font-style:italic}
+
+/* como funciona */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:60px;counter-reset:step}
+.step{
+  background:#fff;border:2.5px solid var(--ink);border-radius:16px;
+  padding:30px 26px;box-shadow:6px 6px 0 var(--ink);
+  position:relative;transition:transform .2s;
+}
+.step:hover{transform:translateY(-6px)}
+.step::before{
+  counter-increment:step;content:counter(step,decimal-leading-zero);
+  font-family:'JetBrains Mono',monospace;font-weight:600;
+  position:absolute;top:-18px;left:22px;background:var(--red);color:#fff;
+  border:2px solid var(--ink);border-radius:8px;padding:3px 12px;font-size:.95rem;
+}
+.step .icon{font-size:2.2rem;margin-bottom:12px}
+.step h3{font-size:1.25rem;margin-bottom:10px}
+.step p{font-size:.93rem;color:#4a4036}
+.note-card{
+  margin-top:44px;background:var(--paper-2);border:2px dashed var(--ink);border-radius:14px;
+  padding:22px 28px;max-width:850px;font-size:.95rem;
+}
+.note-card strong{color:var(--red-dark)}
+
+/* robô / specs */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:center}
+@media(max-width:900px){.split{grid-template-columns:1fr}}
+.polaroid{
+  background:#fff;border:2.5px solid var(--ink);border-radius:14px;padding:14px 14px 18px;
+  box-shadow:var(--shadow);transform:rotate(-2deg);
+}
+.polaroid img{border-radius:8px;height:520px;width:100%;object-fit:cover}
+.polaroid figcaption{font-family:'Fraunces',serif;font-style:italic;text-align:center;margin-top:12px;font-size:.95rem}
+.spec-list{list-style:none;margin-top:30px;display:grid;gap:0}
+.spec-list li{
+  display:flex;gap:16px;align-items:baseline;padding:14px 4px;
+  border-bottom:1.5px solid var(--line);font-size:.98rem;
+}
+.spec-list li b{font-weight:700;min-width:180px}
+.spec-list li span{color:#4a4036}
+.chip-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.chip{
+  font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:600;
+  border:2px solid var(--ink);border-radius:100px;padding:6px 16px;background:#fff;
+}
+
+/* resultados */
+.results{background:var(--red);color:var(--paper)}
+.results .kicker{color:var(--paper)}
+.results .kicker::before{background:var(--paper)}
+.results .section-intro{color:#f4d9d3}
+.res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px;margin-top:56px}
+.res-card{
+  background:var(--paper);color:var(--ink);border:2.5px solid var(--ink);
+  border-radius:16px;padding:32px 28px;box-shadow:6px 6px 0 rgba(26,20,16,.55);
+}
+.res-card .big{font-family:'Fraunces',serif;font-size:3.4rem;font-weight:900;line-height:1;color:var(--red)}
+.res-card p{margin-top:10px;font-size:.93rem;color:#4a4036}
+
+/* ===== pesquisa ao vivo ===== */
+.survey{background:var(--paper-2)}
+.survey-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:34px;margin-top:56px;align-items:start}
+@media(max-width:980px){.survey-grid{grid-template-columns:1fr}}
+.survey-card{
+  background:#fff;border:2.5px solid var(--ink);border-radius:18px;
+  padding:34px 30px;box-shadow:7px 7px 0 var(--ink);
+}
+.survey-card h3{font-size:1.35rem;margin-bottom:6px}
+.survey-card .sub{font-size:.88rem;color:#6b5f50;margin-bottom:22px}
+.q{margin-bottom:22px}
+.q .q-label{font-weight:700;font-size:.95rem;margin-bottom:10px;display:block}
+.q .q-label .n{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:22px;height:22px;border-radius:50%;background:var(--red);color:#fff;
+  font-size:.75rem;margin-right:8px;font-family:'JetBrains Mono',monospace;
+}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pills input{position:absolute;opacity:0;pointer-events:none}
+.pills label{
+  border:2px solid var(--ink);border-radius:100px;padding:8px 18px;
+  font-size:.88rem;font-weight:600;cursor:pointer;background:var(--paper);
+  transition:all .15s;user-select:none;
+}
+.pills label:hover{transform:translateY(-2px)}
+.pills input:checked+label{background:var(--red);color:#fff;box-shadow:3px 3px 0 var(--ink)}
+.q.invalid .q-label{color:var(--red-dark)}
+.q.invalid .pills label{border-color:var(--red)}
+.survey-submit{width:100%;text-align:center;cursor:pointer;font-family:'Inter',sans-serif;font-size:1rem;margin-top:6px}
+.survey-thanks{text-align:center;padding:30px 10px;display:none}
+.survey-thanks .big-heart{font-size:4rem;color:var(--red);display:inline-block;animation:beat 1.1s ease-in-out infinite}
+.survey-thanks h3{margin:14px 0 8px}
+.survey-thanks p{color:#6b5f50;font-size:.92rem}
+
+/* resultados ao vivo */
+.live-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+.live-badge{
+  display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  border:2px solid var(--ink);border-radius:100px;padding:5px 14px;background:var(--amber);
+}
+.live-badge .dot{width:9px;height:9px;border-radius:50%;background:var(--red);animation:beat 1.1s infinite}
+.live-total{display:flex;align-items:baseline;gap:12px;margin-bottom:26px}
+.live-total .num{font-family:'Fraunces',serif;font-size:3.6rem;font-weight:900;line-height:1;color:var(--red)}
+.live-total .lbl{font-size:.9rem;color:#6b5f50;max-width:20ch}
+.chart-block{margin-bottom:26px}
+.chart-block h4{font-size:.92rem;margin-bottom:12px;display:flex;justify-content:space-between;align-items:baseline}
+.chart-block h4 small{font-weight:500;color:#6b5f50;font-size:.75rem}
+.hbar{display:grid;grid-template-columns:92px 1fr 52px;gap:10px;align-items:center;margin-bottom:8px;font-size:.85rem}
+.hbar .lab{font-weight:600;text-align:right}
+.hbar .track{background:var(--paper-2);border:1.5px solid var(--ink);border-radius:100px;height:20px;overflow:hidden}
+.hbar .fill{height:100%;width:0%;border-radius:100px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.hbar .val{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:600}
+.fill.red{background:var(--red)}.fill.ink{background:var(--ink)}.fill.amber{background:var(--amber)}.fill.teal{background:var(--teal)}
+.donut-row{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.donut{
+  width:130px;height:130px;border-radius:50%;flex:0 0 auto;
+  border:2.5px solid var(--ink);position:relative;
+  background:conic-gradient(var(--paper-2) 0 100%);
+}
+.donut::after{
+  content:'';position:absolute;inset:26px;border-radius:50%;
+  background:#fff;border:2px solid var(--ink);
+}
+.legend{display:grid;gap:8px;font-size:.85rem}
+.legend .li{display:flex;align-items:center;gap:9px}
+.legend .sw{width:14px;height:14px;border-radius:4px;border:1.5px solid var(--ink)}
+.legend b{font-family:'JetBrains Mono',monospace;font-size:.8rem}
+.survey-tools{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.tool-btn{
+  font-size:.78rem;font-weight:600;padding:8px 16px;border-radius:100px;
+  border:2px solid var(--ink);background:var(--paper);cursor:pointer;font-family:'Inter',sans-serif;
+}
+.tool-btn:hover{background:var(--paper-2)}
+.empty-msg{color:#6b5f50;font-size:.9rem;font-style:italic}
+.compare-note{
+  margin-top:16px;font-size:.8rem;color:#6b5f50;border-top:1.5px dashed var(--line);padding-top:14px;
+}
+
+/* acessibilidade */
+.access-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin-top:50px}
+.access-card{
+  border:2.5px solid var(--ink);border-radius:16px;padding:28px 24px;background:#fff;
+  box-shadow:5px 5px 0 var(--teal);
+}
+.access-card .icon{font-size:2rem;margin-bottom:12px}
+.access-card h3{font-size:1.1rem;margin-bottom:8px}
+.access-card p{font-size:.9rem;color:#4a4036}
+
+/* equipe */
+.team{background:var(--paper-2)}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px;margin-top:56px}
+.member{
+  background:#fff;border:2.5px solid var(--ink);border-radius:18px;overflow:hidden;
+  box-shadow:7px 7px 0 var(--ink);
+}
+.member img{height:300px;width:100%;object-fit:cover;border-bottom:2.5px solid var(--ink)}
+.member .info{padding:24px}
+.member h3{font-size:1.35rem}
+.member .role{color:var(--red);font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:.1em;margin:4px 0 12px}
+.member p{font-size:.92rem;color:#4a4036}
+
+/* card do treinador */
+.coach-art{
+  height:300px;border-bottom:2.5px solid var(--ink);
+  background:var(--ink);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:16px;padding:20px;
+}
+.coach-metro{width:110px;height:110px}
+.metro-arm{transform-origin:50px 76px;animation:metro 1.1s ease-in-out infinite alternate}
+.metro-tip{transform-origin:50px 76px;animation:metro 1.1s ease-in-out infinite alternate}
+@keyframes metro{from{transform:rotate(-24deg)}to{transform:rotate(24deg)}}
+.coach-quote{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:600;
+  color:var(--paper);text-align:center;font-size:1.05rem;line-height:1.5;
+}
+
+/* galeria */
+.gallery{background:var(--ink);color:var(--paper)}
+.gallery .kicker{color:var(--amber)}
+.gallery .kicker::before{background:var(--amber)}
+.masonry{columns:3;column-gap:18px;margin-top:56px}
+@media(max-width:1000px){.masonry{columns:2}}
+@media(max-width:620px){.masonry{columns:1}}
+.masonry figure{
+  break-inside:avoid;margin-bottom:18px;border:2.5px solid rgba(246,239,227,.9);
+  border-radius:14px;overflow:hidden;position:relative;cursor:pointer;
+}
+.masonry img{width:100%;transition:transform .4s}
+.masonry figure:hover img{transform:scale(1.05)}
+.masonry figcaption{
+  position:absolute;inset:auto 0 0 0;padding:30px 16px 12px;font-size:.82rem;font-weight:600;
+  background:linear-gradient(transparent,rgba(26,20,16,.85));opacity:0;transition:opacity .3s;
+}
+.masonry figure:hover figcaption{opacity:1}
+
+/* ODS */
+.ods-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;margin-top:50px}
+.ods{
+  border-radius:16px;padding:30px 26px;color:#fff;border:2.5px solid var(--ink);
+  box-shadow:6px 6px 0 var(--ink);
+}
+.ods h3{font-size:1.15rem;margin-bottom:8px}
+.ods p{font-size:.9rem;opacity:.92}
+.ods.o4{background:#c5192d}.ods.o10{background:#dd1367}.ods.o11{background:#fd9d24;color:var(--ink)}
+.ods .n{font-family:'Fraunces',serif;font-size:2.6rem;font-weight:900;line-height:1;margin-bottom:10px;display:block}
+
+/* footer */
+footer{
+  background:var(--ink);color:var(--paper);padding:70px 5vw 40px;text-align:center;
+  border-top:6px solid var(--red);
+}
+footer .logo{font-family:'Fraunces',serif;font-weight:900;font-size:2.4rem;letter-spacing:.08em}
+footer .slogan{font-family:'Fraunces',serif;font-style:italic;color:var(--amber);margin:8px 0 24px;font-size:1.15rem}
+footer p{font-size:.85rem;color:#a89a82}
+footer .beat{display:inline-block;animation:beat 1.1s ease-in-out infinite;color:var(--red);font-size:1.4rem;vertical-align:middle}
+.logo-row{
+  display:flex;gap:clamp(28px,6vw,72px);align-items:center;justify-content:center;
+  flex-wrap:wrap;margin:38px auto 30px;padding-top:34px;
+  border-top:1px solid rgba(246,239,227,.15);max-width:900px;
+}
+.logo-row a{display:flex;flex-direction:column;align-items:center;gap:12px;text-decoration:none}
+.logo-row img{height:70px;width:auto;transition:transform .25s}
+.logo-row img.amk{height:96px}
+.logo-row a:hover img{transform:scale(1.08)}
+.logo-row .cap{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:#a89a82}
+.amk-hero{height:clamp(110px,15vw,180px);width:auto;margin-bottom:18px;filter:drop-shadow(0 6px 16px rgba(26,20,16,.25))}
+@keyframes beat{0%,100%{transform:scale(1)}12%{transform:scale(1.35)}24%{transform:scale(1)}36%{transform:scale(1.22)}48%{transform:scale(1)}}
+
+/* lightbox */
+.lightbox{
+  position:fixed;inset:0;background:rgba(26,20,16,.93);z-index:200;
+  display:none;align-items:center;justify-content:center;padding:4vw;cursor:zoom-out;
+}
+.lightbox.open{display:flex}
+.lightbox img{max-height:90vh;max-width:92vw;border:3px solid var(--paper);border-radius:10px}
+
+/* ===== mobile ===== */
+@media(max-width:640px){
+  section{padding:64px 6vw}
+  .hero{padding:96px 6vw 48px;gap:36px}
+  .amk-hero{height:110px;margin-bottom:14px}
+  .hero-tag{font-size:.68rem;padding:5px 12px}
+  .hero .slogan{margin:14px 0 16px}
+  .hero-cta{margin-top:26px;flex-direction:column;gap:12px}
+  .btn{padding:12px 22px;font-size:.9rem;text-align:center}
+  .hero-img .frame img{height:300px}
+  .hero-img .badge{font-size:.78rem;padding:8px 12px;bottom:-14px;left:-6px}
+  .ecg-wrap{height:56px}
+  .stats{gap:14px;margin-top:40px;grid-template-columns:1fr 1fr}
+  .stat{padding:20px 14px}
+  .stat .num{font-size:2.4rem}
+  .pull-quote{margin-top:56px}
+  .steps{gap:18px;margin-top:48px;grid-template-columns:1fr}
+  .polaroid{transform:none}
+  .polaroid img{height:auto;max-height:440px}
+  .spec-list li b{min-width:100px}
+  .spec-list li{font-size:.82rem}
+  .survey-grid{margin-top:40px;gap:24px}
+  .survey-card{padding:24px 18px}
+  .live-total .num{font-size:2.7rem}
+  .hbar{grid-template-columns:64px 1fr 52px;gap:6px;font-size:.76rem}
+  .member img,.coach-art{height:240px}
+  .team-grid{gap:20px}
+  .masonry{column-count:1;column-gap:0}
+  .logo-row{gap:20px;flex-wrap:wrap}
+  .logo-row img{height:44px}
+  .logo-row img.amk{height:58px}
+  nav .logo img{height:30px !important}
+  nav .logo{font-size:1.1rem}
+  .split{flex-direction:column}
+  .contrib-grid{grid-template-columns:1fr !important}
+  .res-grid{grid-template-columns:1fr 1fr}
+}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* language toggle */
+.lang-toggle{display:flex;gap:2px;border:2px solid var(--ink);border-radius:8px;overflow:hidden;margin-left:16px;flex-shrink:0}
+.lang-btn{background:none;border:none;padding:5px 12px;font-size:.72rem;font-weight:700;letter-spacing:.08em;cursor:pointer;font-family:inherit;text-transform:uppercase;transition:background .15s,color .15s;color:var(--ink);line-height:1}
+.lang-btn.active{background:var(--ink);color:var(--paper)}
+@media(max-width:820px){.lang-toggle{margin-left:8px}}
+</style>
+</head>
+<body>
+
+<!-- Pular para conteúdo principal (leitores de tela) -->
+<a href="#main-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;focus:left:0;z-index:999" onfocus="this.style.cssText='position:fixed;top:0;left:0;padding:14px 24px;background:var(--red);color:#fff;font-weight:700;font-size:1rem;z-index:9999;border-radius:0 0 8px 0;text-decoration:none'">Pular para o conteúdo principal</a>
+
+<nav role="navigation" aria-label="Menu principal">
+  <a class="logo" href="#top" aria-label="RITMO — início da página">
+    <img src="logos/ritmo.png" alt="Logo do RITMO" style="height:38px;width:auto">
+    RITMO
+  </a>
+  <ul role="list">
+    <li><a href="#lira">Lira Nordestina</a></li>
+    <li><a href="#por-que">O projeto</a></li>
+    <li><a href="#como-funciona">Como funciona</a></li>
+    <li><a href="#robo">O robô</a></li>
+    <li><a href="pesquisawro2026.html">Pesquisa ↗</a></li>
+    <li><a href="#equipe">Equipe</a></li>
+    <li><a href="#galeria">Galeria</a></li>
+    <li><a href="index.html" style="color:var(--red)">All Might ↗</a></li>
+  </ul>
+  <div class="lang-toggle" role="group" aria-label="Idioma / Language">
+    <button class="lang-btn active" data-lang="pt" onclick="applyLang('pt')">PT</button>
+    <button class="lang-btn" data-lang="en" onclick="applyLang('en')">EN</button>
+  </div>
+  <button class="menu-btn" id="menu-btn" aria-label="Abrir menu">☰</button>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top" role="banner">
+  <div id="main-content">
+    <img class="amk-hero" src="logos/ritmo.png" alt="Logo do RITMO — robô e cangaceirinha com linha de batimento cardíaco">
+    <span class="hero-tag" aria-label="WRO 2026, Future Innovators, Elementary">🤖 WRO 2026 · Future Innovators · Elementary</span>
+    <h1>RITMO</h1>
+    <p class="slogan">"Cada coração, uma história."</p>
+    <p class="lead">
+      A máquina que escuta o seu coração — e responde com <strong>poesia</strong>.
+      A sua batida escolhe um cordel, e ele chega, de papel e verso, na sua mão.
+    </p>
+    <div class="hero-cta">
+      <a class="btn primary" href="#como-funciona">Ver como funciona</a>
+      <a class="btn ghost" href="#galeria">Bastidores do projeto</a>
+    </div>
+  </div>
+  <div class="hero-img" aria-hidden="true">
+    <div class="frame"><img src="fotos/foto-02.jpg" alt="RITMO 2.0 — protótipo real em policarbonato, alumínio e peças impressas em 3D sobre uma mesa de laboratório"></div>
+    <div class="badge">RITMO 2.0 ✦ protótipo real</div>
+  </div>
+  <img class="wm" src="logos/sertao-ink.png" alt="" aria-hidden="true">
+  <div class="ecg-wrap">
+    <svg viewBox="0 0 1200 90" preserveAspectRatio="none">
+      <path class="ecg-path" d="M0 45 H80 L95 20 L110 70 L125 45 H200 L215 38 L225 45 H300 L315 12 L332 78 L348 45 H430 L445 30 L455 45 H530 L545 20 L560 70 L575 45 H600
+      M600 45 H680 L695 20 L710 70 L725 45 H800 L815 38 L825 45 H900 L915 12 L932 78 L948 45 H1030 L1045 30 L1055 45 H1130 L1145 20 L1160 70 L1175 45 H1200"/>
+    </svg>
+  </div>
+</header>
+
+<!-- ============ BARRA DE LOGOS ============ -->
+<div style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 5vw;overflow-x:auto">
+  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;min-width:min-content">
+
+    <span style="font-size:.6rem;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.12em;color:#9c8c78;white-space:nowrap">ODS</span>
+
+    <img src="logos/ods-4.png" alt="ODS 4 — Educação de qualidade" title="ODS 4 — Educação de qualidade" style="height:48px;width:48px;object-fit:cover;border-radius:6px">
+    <img src="logos/ods-10.png" alt="ODS 10 — Redução das desigualdades" title="ODS 10 — Redução das desigualdades" style="height:48px;width:48px;object-fit:cover;border-radius:6px">
+    <img src="logos/ods-11.png" alt="ODS 11 — Cidades e comunidades sustentáveis" title="ODS 11 — Cidades sustentáveis" style="height:48px;width:48px;object-fit:cover;border-radius:6px">
+
+    <div style="width:1px;height:36px;background:var(--line);flex-shrink:0"></div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+      <img src="logos/python.png" alt="Python" style="height:40px;width:auto">
+      <span style="font-size:.58rem;font-weight:600;font-family:'JetBrains Mono',monospace;color:#555">Python</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+      <img src="logos/raspberry.svg" alt="Raspberry Pi" style="height:40px;width:40px">
+      <span style="font-size:.58rem;font-weight:600;font-family:'JetBrains Mono',monospace;color:#555">Raspberry Pi</span>
+    </div>
+
+    <div style="width:1px;height:36px;background:var(--line);flex-shrink:0"></div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+      <img src="logos/talkback.png" alt="TalkBack — Android" style="height:40px;width:40px;border-radius:8px">
+      <span style="font-size:.58rem;font-weight:600;font-family:'JetBrains Mono',monospace;color:#555;text-align:center">TalkBack<br>· VoiceOver</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+      <div style="width:40px;height:40px;border-radius:8px;background:#1e6f68;display:flex;align-items:center;justify-content:center">
+        <svg width="26" height="26" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+          <circle cx="38" cy="22" r="13"/>
+          <path d="M20 88v-20c0-11 10-19 20-19h0c10 0 19 8 19 19v20"/>
+          <path d="M64 32 Q78 50 64 68" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round"/>
+          <path d="M72 23 Q92 50 72 77" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span style="font-size:.58rem;font-weight:600;font-family:'JetBrains Mono',monospace;color:#555;text-align:center">Áudio<br>Descrição</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+      <img src="logos/inclusion-onu.png" alt="Símbolo de Inclusão ONU" style="height:40px;width:auto">
+      <span style="font-size:.58rem;font-weight:600;font-family:'JetBrains Mono',monospace;color:#555;text-align:center">Símbolo<br>Acessibilidade</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ LIRA NORDESTINA ============ -->
+<section id="lira" role="region" aria-label="Lira Nordestina — referência cultural" style="padding:80px 5vw;background:#fff">
+  <img class="wm" src="logos/sertao-ink.png" alt="" aria-hidden="true">
+  <div class="reveal" style="max-width:760px;margin-bottom:48px">
+    <p class="kicker">Referência cultural</p>
+    <h2>A casa que nos mostrou por que o cordel precisa ser preservado.</h2>
+    <p class="section-intro">
+      Durante nossa pesquisa, a <strong>Lira Nordestina</strong> — em Juazeiro do Norte, ligada à URCA (Universidade Regional do Cariri) — foi uma das referências que nos ajudou a entender a importância do cordel como patrimônio vivo. Ver as prensas originais ainda em uso, os folhetos produzidos à mão e a memória guardada naquele espaço confirmou nossa escolha: o cordel físico tinha que ser o centro da nossa solução.
+    </p>
+  </div>
+  <div class="reveal contrib-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:900px">
+    <figure class="polaroid" style="transform:rotate(-1.5deg)">
+      <img src="fotos/lira-fachada.jpg" alt="Fachada da Lira Nordestina — URCA, Juazeiro do Norte" style="height:320px;object-fit:cover;width:100%">
+      <figcaption>Lira Nordestina · URCA · Juazeiro do Norte</figcaption>
+    </figure>
+    <figure class="polaroid" style="transform:rotate(1.2deg)">
+      <img src="fotos/lira-prensa.jpg" alt="Prensa tipográfica original da Lira Nordestina ainda em funcionamento" style="height:320px;object-fit:cover;width:100%">
+      <figcaption>Prensa tipográfica original — ainda em uso</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ CONTRIBUIÇÕES ============ -->
+<section id="contribuicoes" role="region" aria-label="Quem nos ajudou" style="padding:80px 5vw;background:var(--paper-2)">
+  <div class="reveal" style="max-width:760px;margin-bottom:48px">
+    <p class="kicker">Quem nos ajudou</p>
+    <h2>Parceiros que tornaram o RITMO mais completo.</h2>
+    <p class="section-intro">Duas instituições contribuíram diretamente com o projeto — uma validando a proposta cultural, outra garantindo a acessibilidade.</p>
+  </div>
+  <div class="reveal contrib-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:900px">
+    <div style="background:#fff;border:2.5px solid var(--ink);border-radius:16px;padding:28px 24px;box-shadow:6px 6px 0 var(--ink)">
+      <figure class="polaroid" style="margin:0 0 20px;transform:rotate(-1deg)">
+        <img src="fotos/foto-g7.jpg" alt="Equipe na Academia Cearense de Letras" style="height:220px;object-fit:cover;width:100%">
+        <figcaption>Academia Cearense de Letras</figcaption>
+      </figure>
+      <h3 style="font-size:1.1rem;margin-bottom:8px">Academia Cearense de Letras</h3>
+      <p style="font-size:.88rem;color:#4a4036;line-height:1.6">Conversamos com membros da Academia para entender a importância do cordel como patrimônio cultural e validar nossa proposta de levar o folheto a novos públicos.</p>
+    </div>
+    <div style="background:#fff;border:2.5px solid var(--ink);border-radius:16px;padding:28px 24px;box-shadow:6px 6px 0 var(--teal)">
+      <figure class="polaroid" style="margin:0 0 20px;transform:rotate(1deg)">
+        <img src="fotos/foto-g9.jpg" alt="Visita ao Instituto dos Cegos do Ceará" style="height:220px;object-fit:cover;width:100%">
+        <figcaption>Instituto dos Cegos do Ceará</figcaption>
+      </figure>
+      <h3 style="font-size:1.1rem;margin-bottom:8px">Instituto dos Cegos do Ceará</h3>
+      <p style="font-size:.88rem;color:#4a4036;line-height:1.6">Visitamos o Instituto para testar a experiência do RITMO com pessoas com deficiência visual — o que nos levou a incluir instruções em áudio, QR Code com narração e identificação em Braille nos folhetos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEMA ============ -->
+<section class="dark" id="problema" role="region" aria-label="O problema — pesquisa de campo">
+  <img class="wm" src="logos/sertao-paper.png" alt="" aria-hidden="true">
+  <div class="reveal">
+    <p class="kicker">O problema</p>
+    <h2>O cordel continua vivo.<br>Mas precisa encontrar as novas gerações.</h2>
+    <p class="section-intro">
+      O cordel é uma das mais ricas expressões culturais do Brasil — e ainda assim, a maioria dos jovens nunca segurou um folheto. Fizemos uma pesquisa com 180 pessoas para entender esse cenário.
+    </p>
+  </div>
+  <div class="stats reveal">
+    <div class="stat"><div class="num">180</div><p>pessoas participaram da nossa pesquisa de campo</p></div>
+    <div class="stat"><div class="num red">28</div><p>apenas 28 afirmaram já ter lido um cordel na vida</p></div>
+    <div class="stat"><div class="num teal">84%</div><p>nunca tiveram contato real com um folheto de cordel</p></div>
+    <div class="stat"><div class="num">+60</div><p>a maioria dos leitores estava nas gerações mais velhas</p></div>
+  </div>
+
+  <!-- Visualização faixa etária -->
+  <div class="reveal" style="margin-top:56px;max-width:680px">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.15em;color:var(--amber);margin-bottom:24px">Quem leu × quem nunca leu</p>
+    <h3 style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;color:var(--paper);margin-bottom:8px">Os mais velhos leram. Os mais jovens nunca viram um folheto.</h3>
+    <p style="font-size:.9rem;color:#cfc4b0;margin-bottom:32px">Quase todos os 28 que já tiveram contato com o cordel têm mais de 40 anos. Entre os jovens, o cordel é praticamente desconhecido — e foi isso que nos motivou a criar o RITMO.</p>
+
+    <!-- Barra comparativa por faixa -->
+    <div style="display:flex;flex-direction:column;gap:14px">
+
+      <!-- Jovem (até 20 anos) -->
+      <div>
+        <div style="display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:#cfc4b0;margin-bottom:5px">
+          <span>Até 20 anos</span>
+          <span style="font-family:'JetBrains Mono',monospace;color:var(--paper)">3 leram</span>
+        </div>
+        <div style="height:28px;background:rgba(255,255,255,.08);border-radius:100px;border:1.5px solid rgba(255,255,255,.12);overflow:hidden">
+          <div style="width:11%;height:100%;background:var(--red);border-radius:100px;transition:width 1s ease"></div>
+        </div>
+      </div>
+
+      <!-- 20-40 anos -->
+      <div>
+        <div style="display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:#cfc4b0;margin-bottom:5px">
+          <span>20 – 40 anos</span>
+          <span style="font-family:'JetBrains Mono',monospace;color:var(--paper)">poucos leram</span>
+        </div>
+        <div style="height:28px;background:rgba(255,255,255,.08);border-radius:100px;border:1.5px solid rgba(255,255,255,.12);overflow:hidden">
+          <div style="width:18%;height:100%;background:var(--red);border-radius:100px;transition:width 1s ease"></div>
+        </div>
+      </div>
+
+      <!-- 40-60 anos -->
+      <div>
+        <div style="display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:#cfc4b0;margin-bottom:5px">
+          <span>40 – 60 anos</span>
+          <span style="font-family:'JetBrains Mono',monospace;color:var(--paper)">boa parte dos 28</span>
+        </div>
+        <div style="height:28px;background:rgba(255,255,255,.08);border-radius:100px;border:1.5px solid rgba(255,255,255,.12);overflow:hidden">
+          <div style="width:58%;height:100%;background:var(--amber);border-radius:100px;transition:width 1s ease"></div>
+        </div>
+      </div>
+
+      <!-- +60 anos -->
+      <div>
+        <div style="display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:#cfc4b0;margin-bottom:5px">
+          <span>Acima de 60</span>
+          <span style="font-family:'JetBrains Mono',monospace;color:var(--paper)">quase todos leram</span>
+        </div>
+        <div style="height:28px;background:rgba(255,255,255,.08);border-radius:100px;border:1.5px solid rgba(255,255,255,.12);overflow:hidden">
+          <div style="width:92%;height:100%;background:var(--teal);border-radius:100px;transition:width 1s ease"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="display:flex;gap:20px;margin-top:20px;flex-wrap:wrap">
+      <span style="display:flex;align-items:center;gap:7px;font-size:.75rem;color:#cfc4b0"><span style="width:12px;height:12px;border-radius:50%;background:var(--teal);flex-shrink:0"></span>Tiveram contato (28)</span>
+      <span style="display:flex;align-items:center;gap:7px;font-size:.75rem;color:#cfc4b0"><span style="width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;border:1.5px solid rgba(255,255,255,.3)"></span>Nunca tiveram contato (152)</span>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============ POR QUE UMA VENDING MACHINE ============ -->
+<section class="why" id="por-que" role="region" aria-label="Por que uma vending machine">
+  <img class="wm" src="logos/sertao-ink.png" alt="" aria-hidden="true">
+  <div style="max-width:900px">
+    <div class="why-text reveal">
+      <p class="kicker">Por que uma vending machine?</p>
+      <h2>Pegamos a máquina mais comum do mundo — e ensinamos ela a escutar.</h2>
+      <p>
+        Todo mundo conhece o gesto: aproximar-se, escolher, receber. No RITMO, a ordem se inverte — quem fala primeiro é o seu <strong>coração</strong>. A máquina lê a batida e escolhe a história. Em vez de refrigerante, <strong>poesia</strong>. Em vez de consumo, <strong>encontro</strong>.
+      </p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============ COMO FUNCIONA ============ -->
+<section id="como-funciona" role="region" aria-label="Como funciona o RITMO">
+  <div class="reveal">
+    <p class="kicker">Como funciona</p>
+    <h2>Quatro passos entre o coração e a história.</h2>
+    <p class="section-intro">Da aproximação à bandeja, em segundos.</p>
+  </div>
+  <div class="steps reveal">
+    <div class="step">
+      <div class="icon">👋</div>
+      <h3>Aproximação</h3>
+      <p>O sensor ultrassônico percebe a presença da pessoa e inicia a experiência com orientações na tela e em áudio.</p>
+    </div>
+    <div class="step">
+      <div class="icon">❤️</div>
+      <h3>Leitura do coração</h3>
+      <p>A pessoa coloca o dedo no sensor cardíaco. O sistema faz várias leituras, descarta valores instáveis e calcula a média.</p>
+    </div>
+    <div class="step">
+      <div class="icon">🧠</div>
+      <h3>Decisão autônoma</h3>
+      <p>Com base no ritmo, o RITMO escolhe entre duas categorias: histórias <em>calmas e acolhedoras</em> ou <em>motivacionais</em>.</p>
+    </div>
+    <div class="step">
+      <div class="icon">📜</div>
+      <h3>Entrega do cordel</h3>
+      <p>O servomotor gira a espiral e libera um cordel físico na bandeja — com autoria, xilogravura, Braille e QR Code com áudio.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============ O ROBÔ ============ -->
+<section class="team" id="robo" role="region" aria-label="O robô — especificações técnicas">
+  <div class="split">
+    <div class="reveal">
+      <p class="kicker">O robô</p>
+      <h2>Do RITMO 1.0 ao 2.0: construído, testado e reconstruído.</h2>
+      <p class="section-intro">
+        Do RITMO 1.0 aprendemos onde o papel prendia e o que precisava mudar. No 2.0, reposicionamos componentes, reforçamos a estrutura e melhoramos o sistema de entrega.
+      </p>
+      <ul class="spec-list">
+        <li><b>Cérebro</b><span>Raspberry Pi 3 rodando programa em Python</span></li>
+        <li><b>Interface</b><span>Tela de 7 polegadas + alto-falantes com instruções faladas</span></li>
+        <li><b>Sensores</b><span>Ultrassônico (presença) e cardíaco óptico por fotopletismografia</span></li>
+        <li><b>Entrega</b><span>Dois servomotores + duas espirais + bandeja de saída</span></li>
+        <li><b>Estrutura</b><span>Policarbonato, hastes de alumínio e peças impressas em 3D</span></li>
+      </ul>
+      <div class="chip-row">
+        <span class="chip">Python</span>
+        <span class="chip">Raspberry Pi 3</span>
+        <span class="chip">Impressão 3D</span>
+        <span class="chip">Servomotores</span>
+        <span class="chip">Sensor cardíaco</span>
+        <span class="chip">Ultrassônico</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESULTADOS ============ -->
+<section class="results" id="resultados" role="region" aria-label="Resultados dos testes">
+  <div class="reveal">
+    <p class="kicker">Resultados dos testes</p>
+    <h2>O RITMO não foi apenas imaginado.<br>Foi testado, corrigido e aperfeiçoado.</h2>
+    <p class="section-intro">Cada falha nos ajudou a entender melhor o robô — e os números mostram a evolução.</p>
+  </div>
+  <div class="res-grid reveal">
+    <div class="res-card"><div class="big">94%</div><p>de acerto na entrega após os ajustes: 47 de 50 entregas corretas (antes eram 32 de 50)</p></div>
+    <div class="res-card"><div class="big">28/30</div><p>participantes seguiram as instruções corretamente na experiência de uso</p></div>
+    <div class="res-card"><div class="big">25</div><p>pessoas iniciaram a leitura do cordel logo após recebê-lo</p></div>
+    <div class="res-card"><div class="big">18</div><p>acessaram a versão em áudio pelo QR Code do folheto</p></div>
+  </div>
+</section>
+
+<!-- ============ PESQUISA ============ -->
+<section id="pesquisa" style="text-align:center" role="region" aria-label="Pesquisa ao vivo — participe">
+  <div class="reveal">
+    <p class="kicker" style="justify-content:center">Pesquisa ao vivo</p>
+    <h2>Você tem contato com a literatura de cordel?</h2>
+    <p class="section-intro" style="margin:18px auto 36px">
+      2 perguntas · menos de 1 minuto · anônimo. Veja o retrato se formar na hora.
+    </p>
+    <a class="btn primary" href="pesquisawro2026.html" style="margin:0 auto;display:inline-flex">Responder a pesquisa ♥</a>
+  </div>
+</section>
+
+
+<!-- ============ ACESSIBILIDADE ============ -->
+<section id="acessibilidade" style="padding:60px 5vw" role="region" aria-label="Acessibilidade do RITMO">
+  <div class="reveal">
+    <p class="kicker">Acessibilidade</p>
+    <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:14px">Para quem chega de qualquer jeito.</h2>
+    <p class="section-intro" style="margin-bottom:36px">Conversamos com a Academia Cearense de Letras e o Instituto de Cegos do Ceará para garantir que o RITMO não dependa da visão.</p>
+  </div>
+  <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+    <div style="display:flex;gap:14px;align-items:flex-start;background:#fff;border:2px solid var(--ink);border-radius:14px;padding:20px 18px;box-shadow:4px 4px 0 var(--teal)">
+      <span style="font-size:1.6rem;flex-shrink:0">🔊</span>
+      <div><strong style="font-size:.95rem">Instruções faladas</strong><p style="font-size:.85rem;color:#4a4036;margin-top:4px">A máquina orienta toda a experiência por áudio.</p></div>
+    </div>
+    <div style="display:flex;gap:14px;align-items:flex-start;background:#fff;border:2px solid var(--ink);border-radius:14px;padding:20px 18px;box-shadow:4px 4px 0 var(--teal)">
+      <span style="font-size:1.6rem;flex-shrink:0">📱</span>
+      <div><strong style="font-size:.95rem">QR Code com áudio</strong><p style="font-size:.85rem;color:#4a4036;margin-top:4px">Versão narrada do cordel acessível pelo celular.</p></div>
+    </div>
+    <div style="display:flex;gap:14px;align-items:flex-start;background:#fff;border:2px solid var(--ink);border-radius:14px;padding:20px 18px;box-shadow:4px 4px 0 var(--teal)">
+      <span style="font-size:1.6rem;flex-shrink:0">✍️</span>
+      <div><strong style="font-size:.95rem">Autoria preservada</strong><p style="font-size:.85rem;color:#4a4036;margin-top:4px">Folhetos com xilogravura e autoria em destaque.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EQUIPE ============ -->
+<section class="team" id="equipe" role="region" aria-label="Equipe All Might Kids">
+  <div class="reveal">
+    <p class="kicker">A equipe</p>
+    <h2>ALL MIGHT KIDS</h2>
+    <p class="section-intro">Estudantes da Escola SESI SENAI Parangaba, Fortaleza. Cada um tem uma função principal — mas pesquisamos, construímos e decidimos juntos.</p>
+  </div>
+  <figure class="polaroid reveal" style="max-width:640px;margin:56px auto 0;transform:rotate(-1.2deg)">
+    <img src="fotos/foto-equipe.jpg" alt="Equipe ALL MIGHT KIDS apresentando no estande da final internacional da WRO" style="height:auto;max-height:640px;object-fit:cover">
+    <figcaption>ALL MIGHT KIDS em ação: apresentando para o mundo na World Robot Olympiad</figcaption>
+  </figure>
+  <div class="team-grid reveal" style="margin-top:36px">
+    <div class="member">
+      <img src="fotos/foto-16.jpg" alt="Thales desenhando o storyboard da experiência do usuário">
+      <div class="info">
+        <h3>Thales de Sousa Silva</h3>
+        <p class="role">Pesquisador &amp; Designer</p>
+        <p>Pesquisa sobre literatura de cordel, planejamento visual, documentação, organização dos conteúdos e experiência do usuário.</p>
+      </div>
+    </div>
+    <div class="member">
+      <img src="fotos/foto-03.jpg" alt="Miguel conectando os fios do Raspberry Pi">
+      <div class="info">
+        <h3>Miguel Mota Melo Salviano</h3>
+        <p class="role">Engenheiro &amp; Programador</p>
+        <p>Montagem do robô, integração dos componentes, programação em Python e testes do mecanismo de entrega.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALERIA ============ -->
+<section class="gallery" id="galeria" role="region" aria-label="Galeria de fotos do projeto">
+  <div class="reveal">
+    <p class="kicker">Bastidores</p>
+    <h2>Da ideia no papel ao RITMO 2.0</h2>
+    <p class="section-intro" style="color:#cfc4b0">
+      Crazy 8, análise SWOT, modelagem 3D, montagem da estrutura, eletrônica com Raspberry Pi
+      e muitos testes: cada foto conta um pedaço da jornada.
+    </p>
+  </div>
+  <div class="masonry reveal" id="masonry">
+    <figure><img src="fotos/foto-g10.jpg" alt="Equipe All Might Kids montando e ajustando o RITMO no laboratório" loading="lazy"><figcaption>A equipe no laboratório, ajustando o RITMO</figcaption></figure>
+    <figure><img src="fotos/foto-g9.jpg" alt="Visita ao Instituto dos Cegos do Ceará — crianças observando o RITMO em funcionamento" loading="lazy"><figcaption>Visita ao Instituto dos Cegos do Ceará</figcaption></figure>
+    <figure><img src="fotos/foto-g1.jpg" alt="RITMO 2.0 em operação — tela exibe Ouvindo seu coração..." loading="lazy"><figcaption>RITMO 2.0 em pleno funcionamento</figcaption></figure>
+    <figure><img src="fotos/foto-g6.jpg" alt="Miguel e Thales com a bandeira do SESI Ceará e do Brasil" loading="lazy"><figcaption>Representando o Ceará e o Brasil</figcaption></figure>
+    <figure><img src="fotos/foto-g7.jpg" alt="Equipe apresentando o RITMO na Academia Cearense de Letras" loading="lazy"><figcaption>Visita à Academia Cearense de Letras</figcaption></figure>
+    <figure><img src="fotos/foto-g8.jpg" alt="Cordelistas discutindo a seleção de cordéis com a equipe" loading="lazy"><figcaption>Conversa com os mestres do cordel</figcaption></figure>
+    <figure><img src="fotos/foto-g3.jpg" alt="Modelagem 3D no Tinkercad — disco de entrega em laranja" loading="lazy"><figcaption>Modelagem 3D das peças no Tinkercad</figcaption></figure>
+    <figure><img src="fotos/foto-g2.jpg" alt="Desenho técnico da interface do RITMO no computador" loading="lazy"><figcaption>Design de interface no computador</figcaption></figure>
+    <figure><img src="fotos/foto-g4.jpg" alt="Interior do RITMO 2.0 — Raspberry Pi, módulo de baterias e cabeamento" loading="lazy"><figcaption>Raspberry Pi, baterias e eletrônica interna</figcaption></figure>
+    <figure><img src="fotos/foto-g5.jpg" alt="Mecanismo interno — sensores ultrassônicos, molas e servomotor" loading="lazy"><figcaption>Servomotores e mecanismo de entrega</figcaption></figure>
+    <figure><img src="fotos/foto-13.jpg" alt="Crazy 8 — esboços das oito ideias no papel" loading="lazy"><figcaption>Crazy 8: oito caminhos desenhados no papel</figcaption></figure>
+    <figure><img src="fotos/foto-14.jpg" alt="Análise SWOT no quadro branco" loading="lazy"><figcaption>Análise SWOT / FOFA da solução</figcaption></figure>
+    <figure><img src="fotos/foto-16.jpg" alt="Esboços da jornada do usuário" loading="lazy"><figcaption>Storyboard da jornada do usuário</figcaption></figure>
+    <figure><img src="fotos/foto-15.jpg" alt="Matriz de decisão no quadro branco" loading="lazy"><figcaption>Matriz de decisão das ideias</figcaption></figure>
+    <figure><img src="fotos/foto-04.jpg" alt="Modelagem 3D no Tinkercad" loading="lazy"><figcaption>Modelagem 3D das peças</figcaption></figure>
+    <figure><img src="fotos/foto-05.jpg" alt="Desenho técnico no computador" loading="lazy"><figcaption>Desenho técnico da estrutura</figcaption></figure>
+    <figure><img src="fotos/foto-11.jpg" alt="Perfis de alumínio sobre a mesa durante a montagem" loading="lazy"><figcaption>Perfis de alumínio da estrutura</figcaption></figure>
+    <figure><img src="fotos/foto-12.jpg" alt="Dupla trabalhando na moldura de alumínio" loading="lazy"><figcaption>Ajustes finos na estrutura</figcaption></figure>
+    <figure><img src="fotos/foto-08.jpg" alt="Dupla montando o módulo da estrutura" loading="lazy"><figcaption>Montagem do módulo superior</figcaption></figure>
+    <figure><img src="fotos/foto-07.jpg" alt="Fixando o policarbonato na estrutura" loading="lazy"><figcaption>Fixação do policarbonato</figcaption></figure>
+    <figure><img src="fotos/foto-03.jpg" alt="Ligação dos fios no Raspberry Pi" loading="lazy"><figcaption>Eletrônica: Raspberry Pi e sensores</figcaption></figure>
+    <figure><img src="fotos/foto-06.jpg" alt="Pesquisa de pinagem e conexões" loading="lazy"><figcaption>Pesquisa de conexões e pinagem</figcaption></figure>
+    <figure><img src="fotos/foto-09.jpg" alt="Pesquisa de referências de montagem" loading="lazy"><figcaption>Estudo de referências técnicas</figcaption></figure>
+    <figure><img src="fotos/foto-10.jpg" alt="Robô da geração anterior da equipe" loading="lazy"><figcaption>Experiência anterior da equipe na WRO</figcaption></figure>
+  </div>
+</section>
+
+<footer>
+  <img class="wm" src="logos/sertao-paper.png" alt="" aria-hidden="true">
+  <img src="logos/ritmo.png" alt="Logo do RITMO" style="height:110px;width:auto;margin:0 auto 10px">
+  <div class="logo">RITMO</div>
+  <p class="slogan">Cada coração <span class="beat">♥</span> uma história</p>
+  <p>ALL MIGHT KIDS · Escola SESI SENAI Parangaba · Fortaleza · Ceará · Brasil</p>
+  <p style="margin-top:8px">World Robot Olympiad 2026 · Future Innovators · Elementary · ODS 4, 10 e 11</p>
+  <div class="logo-row">
+    <a href="index.html"><img class="amk" src="logos/amk.png" alt="Logo da equipe ALL MIGHT KIDS"><span class="cap">A equipe</span></a>
+    <a><img src="logos/sesi.png" alt="Logo SESI FIEC Ceará"><span class="cap">Patrocínio</span></a>
+    <a><img src="logos/wro.png" alt="Logo World Robot Olympiad"><span class="cap">O evento</span></a>
+  </div>
+  <p style="margin-top:6px;font-size:.75rem">SESI FIEC Ceará · World Robot Olympiad</p>
+</footer>
+
+<div class="lightbox" id="lightbox"><img src="" alt=""></div>
+
+<script>
+// menu mobile
+const menuBtn = document.getElementById('menu-btn');
+const navUl = document.querySelector('nav ul');
+menuBtn.addEventListener('click', () => navUl.classList.toggle('open'));
+navUl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navUl.classList.remove('open')));
+
+// reveal on scroll
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+}), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// lightbox
+const lb = document.getElementById('lightbox');
+const lbImg = lb.querySelector('img');
+document.querySelectorAll('#masonry img').forEach(img => {
+  img.parentElement.addEventListener('click', () => {
+    lbImg.src = img.src; lbImg.alt = img.alt; lb.classList.add('open');
+  });
+});
+lb.addEventListener('click', () => lb.classList.remove('open'));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+
+// ============ i18n ============
+const TRANSLATIONS = {
+  pt: {
+    nav_lira:'Lira Nordestina', nav_projeto:'O projeto', nav_como:'Como funciona',
+    nav_robo:'O robô', nav_pesquisa:'Pesquisa ↗', nav_equipe:'Equipe', nav_galeria:'Galeria',
+    hero_slogan:'"Cada coração, uma história."',
+    hero_lead:'A máquina que escuta o seu coração — e responde com <strong>poesia</strong>. A sua batida escolhe um cordel, e ele chega, de papel e verso, na sua mão.',
+    hero_cta1:'Ver como funciona', hero_cta2:'Bastidores do projeto',
+    hero_badge:'RITMO 2.0 ✦ protótipo real',
+    lira_kicker:'Referência cultural',
+    lira_h2:'A casa que nos mostrou por que o cordel precisa ser preservado.',
+    lira_intro:'Durante nossa pesquisa, a <strong>Lira Nordestina</strong> — em Juazeiro do Norte, ligada à URCA (Universidade Regional do Cariri) — foi uma das referências que nos ajudou a entender a importância do cordel como patrimônio vivo. Ver as prensas originais ainda em uso, os folhetos produzidos à mão e a memória guardada naquele espaço confirmou nossa escolha: o cordel físico tinha que ser o centro da nossa solução.',
+    contrib_kicker:'Quem nos ajudou',
+    contrib_h2:'Parceiros que tornaram o RITMO mais completo.',
+    contrib_intro:'Duas instituições contribuíram diretamente com o projeto — uma validando a proposta cultural, outra garantindo a acessibilidade.',
+    contrib_acl_p:'Conversamos com membros da Academia para entender a importância do cordel como patrimônio cultural e validar nossa proposta de levar o folheto a novos públicos.',
+    contrib_icc_p:'Visitamos o Instituto para testar a experiência do RITMO com pessoas com deficiência visual — o que nos levou a incluir instruções em áudio, QR Code com narração e identificação em Braille nos folhetos.',
+    prob_kicker:'O problema',
+    prob_h2:'O cordel continua vivo.<br>Mas precisa encontrar as novas gerações.',
+    prob_intro:'O cordel é uma das mais ricas expressões culturais do Brasil — e ainda assim, a maioria dos jovens nunca segurou um folheto. Fizemos uma pesquisa com 180 pessoas para entender esse cenário.',
+    stat1_p:'pessoas participaram da nossa pesquisa de campo',
+    stat2_p:'apenas 28 afirmaram já ter lido um cordel na vida',
+    stat3_p:'nunca tiveram contato real com um folheto de cordel',
+    stat4_p:'a maioria dos leitores estava nas gerações mais velhas',
+    age_title:'Quem leu × quem nunca leu',
+    age_h3:'Os mais velhos leram. Os mais jovens nunca viram um folheto.',
+    age_p:'Quase todos os 28 que já tiveram contato com o cordel têm mais de 40 anos. Entre os jovens, o cordel é praticamente desconhecido — e foi isso que nos motivou a criar o RITMO.',
+    porq_kicker:'Por que uma vending machine?',
+    porq_h2:'Pegamos a máquina mais comum do mundo — e ensinamos ela a escutar.',
+    porq_p:'Todo mundo conhece o gesto: aproximar-se, escolher, receber. No RITMO, a ordem se inverte — quem fala primeiro é o seu <strong>coração</strong>. A máquina lê a batida e escolhe a história. Em vez de refrigerante, <strong>poesia</strong>. Em vez de consumo, <strong>encontro</strong>.',
+    como_kicker:'Como funciona',
+    como_h2:'Quatro passos entre o coração e a história.',
+    como_intro:'Da aproximação à bandeja, em segundos.',
+    step1_h3:'Aproximação', step1_p:'O sensor ultrassônico percebe a presença da pessoa e inicia a experiência com orientações na tela e em áudio.',
+    step2_h3:'Leitura do coração', step2_p:'A pessoa coloca o dedo no sensor cardíaco. O sistema faz várias leituras, descarta valores instáveis e calcula a média.',
+    step3_h3:'Decisão autônoma', step3_p:'Com base no ritmo, o RITMO escolhe entre duas categorias: histórias <em>calmas e acolhedoras</em> ou <em>motivacionais</em>.',
+    step4_h3:'Entrega do cordel', step4_p:'O servomotor gira a espiral e libera um cordel físico na bandeja — com autoria, xilogravura, Braille e QR Code com áudio.',
+    robo_kicker:'O robô',
+    robo_h2:'Do RITMO 1.0 ao 2.0: construído, testado e reconstruído.',
+    robo_intro:'Do RITMO 1.0 aprendemos onde o papel prendia e o que precisava mudar. No 2.0, reposicionamos componentes, reforçamos a estrutura e melhoramos o sistema de entrega.',
+    spec_b1:'Cérebro', spec_s1:'Raspberry Pi 3 rodando programa em Python',
+    spec_b2:'Interface', spec_s2:'Tela de 7 polegadas + alto-falantes com instruções faladas',
+    spec_b3:'Sensores', spec_s3:'Ultrassônico (presença) e cardíaco óptico por fotopletismografia',
+    spec_b4:'Entrega', spec_s4:'Dois servomotores + duas espirais + bandeja de saída',
+    spec_b5:'Estrutura', spec_s5:'Policarbonato, hastes de alumínio e peças impressas em 3D',
+    res_kicker:'Resultados dos testes',
+    res_h2:'O RITMO não foi apenas imaginado.<br>Foi testado, corrigido e aperfeiçoado.',
+    res_intro:'Cada falha nos ajudou a entender melhor o robô — e os números mostram a evolução.',
+    res1_p:'de acerto na entrega após os ajustes: 47 de 50 entregas corretas (antes eram 32 de 50)',
+    res2_p:'participantes seguiram as instruções corretamente na experiência de uso',
+    res3_p:'pessoas iniciaram a leitura do cordel logo após recebê-lo',
+    res4_p:'acessaram a versão em áudio pelo QR Code do folheto',
+    pesq_kicker:'Pesquisa ao vivo',
+    pesq_h2:'Você tem contato com a literatura de cordel?',
+    pesq_intro:'2 perguntas · menos de 1 minuto · anônimo. Veja o retrato se formar na hora.',
+    pesq_btn:'Responder a pesquisa ♥',
+    acess_kicker:'Acessibilidade',
+    acess_h2:'Para quem chega de qualquer jeito.',
+    acess_intro:'Conversamos com a Academia Cearense de Letras e o Instituto de Cegos do Ceará para garantir que o RITMO não dependa da visão.',
+    acess_c1_strong:'Instruções faladas', acess_c1_p:'A máquina orienta toda a experiência por áudio.',
+    acess_c2_strong:'QR Code com áudio', acess_c2_p:'Versão narrada do cordel acessível pelo celular.',
+    acess_c3_strong:'Autoria preservada', acess_c3_p:'Folhetos com xilogravura e autoria em destaque.',
+    equipe_kicker:'A equipe',
+    equipe_intro:'Estudantes da Escola SESI SENAI Parangaba, Fortaleza. Cada um tem uma função principal — mas pesquisamos, construímos e decidimos juntos.',
+    equipe_fig:'ALL MIGHT KIDS em ação: apresentando para o mundo na World Robot Olympiad',
+    thales_role:'Pesquisador & Designer',
+    thales_p:'Pesquisa sobre literatura de cordel, planejamento visual, documentação, organização dos conteúdos e experiência do usuário.',
+    miguel_role:'Engenheiro & Programador',
+    miguel_p:'Montagem do robô, integração dos componentes, programação em Python e testes do mecanismo de entrega.',
+    gal_kicker:'Bastidores',
+    gal_h2:'Da ideia no papel ao RITMO 2.0',
+    gal_intro:'Crazy 8, análise SWOT, modelagem 3D, montagem da estrutura, eletrônica com Raspberry Pi e muitos testes: cada foto conta um pedaço da jornada.',
+    footer_slogan:'Cada coração <span class="beat">♥</span> uma história',
+    footer_cap1:'A equipe', footer_cap2:'Patrocínio', footer_cap3:'O evento',
+    menu_btn_aria:'Abrir menu',
+  },
+  en: {
+    nav_lira:'Lira Nordestina', nav_projeto:'The Project', nav_como:'How It Works',
+    nav_robo:'The Robot', nav_pesquisa:'Survey ↗', nav_equipe:'Team', nav_galeria:'Gallery',
+    hero_slogan:'"Every heartbeat, a story."',
+    hero_lead:'The machine that listens to your heart — and responds with <strong>poetry</strong>. Your heartbeat chooses a cordel, and it arrives — in paper and verse — in your hands.',
+    hero_cta1:'See how it works', hero_cta2:'Behind the scenes',
+    hero_badge:'RITMO 2.0 ✦ real prototype',
+    lira_kicker:'Cultural Reference',
+    lira_h2:'The place that showed us why cordel must be preserved.',
+    lira_intro:'During our research, <strong>Lira Nordestina</strong> — in Juazeiro do Norte, linked to URCA (Regional University of Cariri) — was one of the references that helped us understand the importance of cordel as living heritage. Seeing the original presses still in use, handmade booklets, and the memory kept alive in that space confirmed our choice: physical cordel had to be at the center of our solution.',
+    contrib_kicker:'Who Helped Us',
+    contrib_h2:'Partners who made RITMO more complete.',
+    contrib_intro:'Two institutions directly contributed to the project — one validating the cultural proposal, the other ensuring accessibility.',
+    contrib_acl_p:'We spoke with members of the Academy to understand the importance of cordel as cultural heritage and to validate our proposal of bringing the booklet to new audiences.',
+    contrib_icc_p:'We visited the Institute to test the RITMO experience with visually impaired people — which led us to include audio instructions, a narrated QR Code, and Braille identification on the booklets.',
+    prob_kicker:'The Problem',
+    prob_h2:'Cordel is still alive.<br>But it needs to reach new generations.',
+    prob_intro:'Cordel is one of Brazil\'s richest cultural expressions — and yet most young people have never held a booklet. We surveyed 180 people to understand this reality.',
+    stat1_p:'people took part in our field survey',
+    stat2_p:'only 28 said they had ever read a cordel in their lives',
+    stat3_p:'never had any real contact with a cordel booklet',
+    stat4_p:'most readers were from older generations',
+    age_title:'Who read × who never read',
+    age_h3:'Older generations read it. Young people have never seen a booklet.',
+    age_p:'Almost all 28 who had contact with cordel are over 40. Among young people, cordel is virtually unknown — and that is what motivated us to create RITMO.',
+    porq_kicker:'Why a Vending Machine?',
+    porq_h2:'We took the world\'s most familiar machine — and taught it to listen.',
+    porq_p:'Everyone knows the gesture: walk up, choose, receive. In RITMO, the order reverses — your <strong>heart</strong> speaks first. The machine reads your heartbeat and chooses the story. Instead of a soft drink, <strong>poetry</strong>. Instead of consumption, <strong>connection</strong>.',
+    como_kicker:'How It Works',
+    como_h2:'Four steps between the heart and the story.',
+    como_intro:'From approach to tray, in seconds.',
+    step1_h3:'Approach', step1_p:'The ultrasonic sensor detects the person\'s presence and begins the experience with on-screen and audio instructions.',
+    step2_h3:'Heart Reading', step2_p:'The person places a finger on the heart sensor. The system takes multiple readings, discards unstable values, and calculates the average.',
+    step3_h3:'Autonomous Decision', step3_p:'Based on the rhythm, RITMO chooses between two categories: <em>calm and welcoming</em> or <em>motivational</em> stories.',
+    step4_h3:'Cordel Delivery', step4_p:'The servo motor turns the spiral and releases a physical cordel into the tray — with authorship, woodcut print, Braille, and an audio QR Code.',
+    robo_kicker:'The Robot',
+    robo_h2:'From RITMO 1.0 to 2.0: built, tested, and rebuilt.',
+    robo_intro:'From RITMO 1.0 we learned where paper jammed and what needed to change. In 2.0, we repositioned components, reinforced the structure, and improved the delivery system.',
+    spec_b1:'Brain', spec_s1:'Raspberry Pi 3 running a Python program',
+    spec_b2:'Interface', spec_s2:'7-inch screen + speakers with spoken instructions',
+    spec_b3:'Sensors', spec_s3:'Ultrasonic (presence) and optical heart sensor via photoplethysmography',
+    spec_b4:'Delivery', spec_s4:'Two servo motors + two spirals + output tray',
+    spec_b5:'Structure', spec_s5:'Polycarbonate, aluminum rods, and 3D-printed parts',
+    res_kicker:'Test Results',
+    res_h2:'RITMO wasn\'t just imagined.<br>It was tested, corrected, and improved.',
+    res_intro:'Every failure helped us understand the robot better — and the numbers show the progress.',
+    res1_p:'delivery accuracy after adjustments: 47 out of 50 correct (previously 32 out of 50)',
+    res2_p:'participants followed the instructions correctly during the user experience',
+    res3_p:'people began reading the cordel right after receiving it',
+    res4_p:'accessed the audio version via the booklet\'s QR Code',
+    pesq_kicker:'Live Survey',
+    pesq_h2:'Have you ever engaged with cordel literature?',
+    pesq_intro:'2 questions · under 1 minute · anonymous. Watch the picture take shape in real time.',
+    pesq_btn:'Take the survey ♥',
+    acess_kicker:'Accessibility',
+    acess_h2:'For everyone, however they arrive.',
+    acess_intro:'We spoke with the Academia Cearense de Letras and the Instituto de Cegos do Ceará to ensure RITMO does not depend on vision.',
+    acess_c1_strong:'Spoken Instructions', acess_c1_p:'The machine guides the entire experience through audio.',
+    acess_c2_strong:'Audio QR Code', acess_c2_p:'Narrated version of the cordel accessible by phone.',
+    acess_c3_strong:'Authorship Preserved', acess_c3_p:'Booklets featuring woodcut prints and author credit.',
+    equipe_kicker:'The Team',
+    equipe_intro:'Students from Escola SESI SENAI Parangaba, Fortaleza. Each has a main role — but we research, build, and decide together.',
+    equipe_fig:'ALL MIGHT KIDS in action: presenting to the world at the World Robot Olympiad',
+    thales_role:'Researcher & Designer',
+    thales_p:'Research on cordel literature, visual planning, documentation, content organization, and user experience.',
+    miguel_role:'Engineer & Programmer',
+    miguel_p:'Robot assembly, component integration, Python programming, and delivery mechanism testing.',
+    gal_kicker:'Behind the Scenes',
+    gal_h2:'From paper idea to RITMO 2.0',
+    gal_intro:'Crazy 8, SWOT analysis, 3D modeling, structure assembly, Raspberry Pi electronics and many tests: every photo tells a piece of the journey.',
+    footer_slogan:'Every heartbeat <span class="beat">♥</span> a story',
+    footer_cap1:'The team', footer_cap2:'Sponsor', footer_cap3:'The event',
+    menu_btn_aria:'Open menu',
+  }
+};
+
+function applyLang(lang) {
+  const t = TRANSLATIONS[lang];
+
+  // nav
+  const navLinks = document.querySelectorAll('nav ul a');
+  const navKeys = ['nav_lira','nav_projeto','nav_como','nav_robo','nav_pesquisa','nav_equipe','nav_galeria'];
+  navLinks.forEach((a,i) => { if(navKeys[i]) a.textContent = t[navKeys[i]]; });
+  document.getElementById('menu-btn').setAttribute('aria-label', t.menu_btn_aria);
+
+  // hero
+  const slogan = document.querySelector('.hero .slogan');
+  if(slogan) slogan.textContent = t.hero_slogan;
+  const lead = document.querySelector('.hero p.lead');
+  if(lead) lead.innerHTML = t.hero_lead;
+  const ctaBtns = document.querySelectorAll('.hero-cta .btn');
+  if(ctaBtns[0]) ctaBtns[0].textContent = t.hero_cta1;
+  if(ctaBtns[1]) ctaBtns[1].textContent = t.hero_cta2;
+  const badge = document.querySelector('.hero-img .badge');
+  if(badge) badge.textContent = t.hero_badge;
+
+  // #lira
+  const lira = document.getElementById('lira');
+  if(lira) {
+    lira.querySelector('.kicker').textContent = t.lira_kicker;
+    lira.querySelector('h2').textContent = t.lira_h2;
+    lira.querySelector('.section-intro').innerHTML = t.lira_intro;
+  }
+
+  // #contribuicoes
+  const contrib = document.getElementById('contribuicoes');
+  if(contrib) {
+    contrib.querySelector('.kicker').textContent = t.contrib_kicker;
+    contrib.querySelector('h2').textContent = t.contrib_h2;
+    contrib.querySelector('.section-intro').textContent = t.contrib_intro;
+    const boxes = contrib.querySelectorAll('.contrib-grid > div');
+    if(boxes[0]) boxes[0].querySelector('p[style]').textContent = t.contrib_acl_p;
+    if(boxes[1]) boxes[1].querySelector('p[style]').textContent = t.contrib_icc_p;
+  }
+
+  // #problema
+  const prob = document.getElementById('problema');
+  if(prob) {
+    prob.querySelector('.kicker').textContent = t.prob_kicker;
+    prob.querySelector('h2').innerHTML = t.prob_h2;
+    prob.querySelector('.section-intro').textContent = t.prob_intro;
+    const statPs = prob.querySelectorAll('.stat p');
+    ['stat1_p','stat2_p','stat3_p','stat4_p'].forEach((k,i) => { if(statPs[i]) statPs[i].textContent = t[k]; });
+    const ageReveal = prob.querySelectorAll('.reveal')[2];
+    if(ageReveal) {
+      const allPs = ageReveal.querySelectorAll('p');
+      if(allPs[0]) allPs[0].textContent = t.age_title;
+      const ageH3 = ageReveal.querySelector('h3');
+      if(ageH3) ageH3.textContent = t.age_h3;
+      if(allPs[1]) allPs[1].textContent = t.age_p;
+    }
+  }
+
+  // #por-que
+  const porq = document.getElementById('por-que');
+  if(porq) {
+    porq.querySelector('.kicker').textContent = t.porq_kicker;
+    porq.querySelector('h2').textContent = t.porq_h2;
+    const wyP = porq.querySelector('.why-text p:not(.kicker)');
+    if(wyP) wyP.innerHTML = t.porq_p;
+  }
+
+  // #como-funciona
+  const como = document.getElementById('como-funciona');
+  if(como) {
+    como.querySelector('.kicker').textContent = t.como_kicker;
+    como.querySelector('h2').textContent = t.como_h2;
+    como.querySelector('.section-intro').textContent = t.como_intro;
+    const steps = como.querySelectorAll('.step');
+    ['step1','step2','step3','step4'].forEach((k,i) => {
+      if(!steps[i]) return;
+      steps[i].querySelector('h3').textContent = t[k+'_h3'];
+      steps[i].querySelector('p').innerHTML = t[k+'_p'];
+    });
+  }
+
+  // #robo
+  const robo = document.getElementById('robo');
+  if(robo) {
+    robo.querySelector('.kicker').textContent = t.robo_kicker;
+    robo.querySelector('h2').textContent = t.robo_h2;
+    robo.querySelector('.section-intro').textContent = t.robo_intro;
+    const specLis = robo.querySelectorAll('.spec-list li');
+    [['spec_b1','spec_s1'],['spec_b2','spec_s2'],['spec_b3','spec_s3'],['spec_b4','spec_s4'],['spec_b5','spec_s5']].forEach(([bk,sk],i) => {
+      if(!specLis[i]) return;
+      specLis[i].querySelector('b').textContent = t[bk];
+      specLis[i].querySelector('span').textContent = t[sk];
+    });
+  }
+
+  // #resultados
+  const res = document.getElementById('resultados');
+  if(res) {
+    res.querySelector('.kicker').textContent = t.res_kicker;
+    res.querySelector('h2').innerHTML = t.res_h2;
+    res.querySelector('.section-intro').textContent = t.res_intro;
+    const resPs = res.querySelectorAll('.res-card p');
+    ['res1_p','res2_p','res3_p','res4_p'].forEach((k,i) => { if(resPs[i]) resPs[i].textContent = t[k]; });
+  }
+
+  // #pesquisa
+  const pesq = document.getElementById('pesquisa');
+  if(pesq) {
+    pesq.querySelector('.kicker').textContent = t.pesq_kicker;
+    pesq.querySelector('h2').textContent = t.pesq_h2;
+    pesq.querySelector('.section-intro').textContent = t.pesq_intro;
+    const pesqBtn = pesq.querySelector('.btn');
+    if(pesqBtn) pesqBtn.textContent = t.pesq_btn;
+  }
+
+  // #acessibilidade
+  const acess = document.getElementById('acessibilidade');
+  if(acess) {
+    acess.querySelector('.kicker').textContent = t.acess_kicker;
+    acess.querySelector('h2').textContent = t.acess_h2;
+    acess.querySelector('.section-intro').textContent = t.acess_intro;
+    const cards = acess.querySelectorAll('[style*="display:flex"][style*="gap:14px"]');
+    const cardKeys = [['acess_c1_strong','acess_c1_p'],['acess_c2_strong','acess_c2_p'],['acess_c3_strong','acess_c3_p']];
+    cards.forEach((c,i) => {
+      if(!cardKeys[i]) return;
+      const str = c.querySelector('strong');
+      const p = c.querySelector('p');
+      if(str) str.textContent = t[cardKeys[i][0]];
+      if(p) p.textContent = t[cardKeys[i][1]];
+    });
+  }
+
+  // #equipe
+  const equipe = document.getElementById('equipe');
+  if(equipe) {
+    equipe.querySelector('.kicker').textContent = t.equipe_kicker;
+    equipe.querySelector('.section-intro').textContent = t.equipe_intro;
+    const pol = equipe.querySelector('.polaroid figcaption');
+    if(pol) pol.textContent = t.equipe_fig;
+    const members = equipe.querySelectorAll('.member');
+    if(members[0]) {
+      members[0].querySelector('.role').textContent = t.thales_role;
+      const mp = members[0].querySelector('.info p:not(.role)');
+      if(mp) mp.textContent = t.thales_p;
+    }
+    if(members[1]) {
+      members[1].querySelector('.role').textContent = t.miguel_role;
+      const mp = members[1].querySelector('.info p:not(.role)');
+      if(mp) mp.textContent = t.miguel_p;
+    }
+  }
+
+  // #galeria
+  const gal = document.getElementById('galeria');
+  if(gal) {
+    gal.querySelector('.kicker').textContent = t.gal_kicker;
+    gal.querySelector('h2').textContent = t.gal_h2;
+    gal.querySelector('.section-intro').textContent = t.gal_intro;
+  }
+
+  // footer
+  const footSlogan = document.querySelector('footer .slogan');
+  if(footSlogan) footSlogan.innerHTML = t.footer_slogan;
+  const caps = document.querySelectorAll('.logo-row .cap');
+  if(caps[0]) caps[0].textContent = t.footer_cap1;
+  if(caps[1]) caps[1].textContent = t.footer_cap2;
+  if(caps[2]) caps[2].textContent = t.footer_cap3;
+
+  // toggle buttons + html lang
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+  try { localStorage.setItem('ritmo_lang', lang); } catch(e) {}
+}
+
+// init from storage
+(function() {
+  try {
+    const saved = localStorage.getItem('ritmo_lang');
+    if(saved && saved !== 'pt') applyLang(saved);
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>

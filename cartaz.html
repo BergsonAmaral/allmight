@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cartaz QR — RITMO</title>
+<link rel="icon" type="image/png" href="logos/ritmo.png">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root{--ink:#1a1410;--paper:#f6efe3;--red:#c1272d;--amber:#e8a33d}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#d8cbb2;color:var(--ink);display:flex;flex-direction:column;align-items:center;padding:30px 16px}
+
+/* controles (não saem na impressão) */
+.controls{
+  background:#fff;border:2px solid var(--ink);border-radius:12px;
+  padding:16px 20px;margin-bottom:26px;max-width:640px;width:100%;
+}
+.controls label{font-weight:700;font-size:.85rem;display:block;margin-bottom:6px}
+.controls .row{display:flex;gap:10px;flex-wrap:wrap}
+.controls input{
+  flex:1;min-width:240px;padding:10px 14px;border:2px solid var(--ink);
+  border-radius:8px;font-size:.95rem;font-family:'Inter',sans-serif;
+}
+.controls button{
+  padding:10px 22px;border:2px solid var(--ink);border-radius:8px;background:var(--red);
+  color:#fff;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;
+}
+.controls .hint{font-size:.78rem;color:#6b5f50;margin-top:8px}
+
+/* cartaz A4 */
+.poster{
+  width:210mm;min-height:297mm;background:var(--paper);
+  border:3px solid var(--ink);display:flex;flex-direction:column;
+  align-items:center;text-align:center;padding:16mm 14mm;position:relative;overflow:hidden;
+}
+.poster .logo{width:96mm;height:auto}
+.poster h1{
+  font-family:'Fraunces',serif;font-weight:900;font-size:30pt;line-height:1.15;margin-top:2mm;
+}
+.poster h1 em{color:var(--red);font-style:italic}
+.poster .slogan{font-family:'Fraunces',serif;font-style:italic;font-size:15pt;color:var(--red);margin-top:2mm}
+.steps{display:flex;gap:6mm;margin:9mm 0;width:100%;justify-content:center}
+.step{
+  flex:1;max-width:52mm;border:2.5px solid var(--ink);border-radius:5mm;background:#fff;
+  padding:6mm 4mm;box-shadow:2.5mm 2.5mm 0 var(--ink);
+}
+.step .ico{font-size:22pt}
+.step p{font-size:10.5pt;font-weight:600;line-height:1.35;margin-top:2mm}
+.qr-zone{
+  display:flex;align-items:center;gap:10mm;margin-top:4mm;
+  border:3px dashed var(--red);border-radius:6mm;padding:8mm 12mm;background:#fff;
+}
+#qrcode{width:52mm;height:52mm}
+#qrcode img,#qrcode canvas{width:52mm !important;height:52mm !important}
+.qr-txt{text-align:left;max-width:70mm}
+.qr-txt h2{font-family:'Fraunces',serif;font-weight:900;font-size:17pt;line-height:1.2}
+.qr-txt p{font-size:10.5pt;margin-top:2mm;color:#4a4036}
+.ecg{width:100%;margin-top:auto;padding-top:6mm}
+.ecg svg{width:100%;height:12mm}
+.foot{font-size:9pt;color:#6b5f50;margin-top:2mm}
+@media print{
+  body{background:#fff;padding:0}
+  .controls{display:none}
+  .poster{border:none;width:100%;min-height:auto}
+  @page{size:A4 portrait;margin:0}
+}
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <label for="url">Endereço que o QR vai abrir</label>
+  <div class="row">
+    <input id="url" type="text" value="http://10.3.48.249:8123/#pesquisa">
+    <button onclick="gerar()">Gerar QR</button>
+    <button onclick="print()" style="background:var(--ink)">🖨 Imprimir</button>
+  </div>
+  <p class="hint">
+    Na banca: deixe o site rodando no notebook e use o endereço da rede local (ex.:
+    http://IP-do-notebook:8123). Quando o site estiver publicado na internet, troque pelo
+    link definitivo e imprima de novo.
+  </p>
+</div>
+
+<div class="poster">
+  <img class="logo" src="logos/ritmo.png" alt="RITMO — robô e cangaceirinho com linha de batimento cardíaco">
+  <h1>Seu coração bate.<br>O RITMO responde <em>em verso</em>.</h1>
+  <p class="slogan">“Cada coração, uma história.”</p>
+
+  <div class="steps">
+    <div class="step"><div class="ico">👋</div><p>Aproxime-se:<br>o robô percebe você</p></div>
+    <div class="step"><div class="ico">❤️</div><p>Coloque o dedo:<br>ele escuta sua batida</p></div>
+    <div class="step"><div class="ico">📜</div><p>Receba um cordel<br>escolhido para você</p></div>
+  </div>
+
+  <div class="qr-zone">
+    <div id="qrcode"></div>
+    <div class="qr-txt">
+      <h2>Aponte a câmera 📱</h2>
+      <p>Conheça o projeto, veja os bastidores e <strong>responda nossa pesquisa</strong> — os gráficos se formam na hora, com a sua resposta dentro.</p>
+    </div>
+  </div>
+
+  <div class="ecg">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+      <path d="M0 30 H180 L200 10 L220 50 L240 30 H420 L440 22 L452 30 H640 L660 6 L682 54 L700 30 H900 L920 16 L935 30 H1200" fill="none" stroke="#c1272d" stroke-width="3"/>
+    </svg>
+    <p class="foot">ALL MIGHT KIDS · Escola SESI SENAI Parangaba · WRO 2026 · Future Innovators</p>
+  </div>
+</div>
+
+<script>
+let qr = null;
+function gerar(){
+  const el = document.getElementById('qrcode');
+  el.innerHTML = '';
+  qr = new QRCode(el, {
+    text: document.getElementById('url').value.trim(),
+    width: 400, height: 400,
+    colorDark: '#1a1410', colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+}
+gerar();
+</script>
+</body>
+</html>

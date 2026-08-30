@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 200">
+  <!-- Dynamic accessibility symbol - Accessible Icon Project / UN -->
+  <g fill="#009edb">
+    <!-- Head -->
+    <circle cx="100" cy="22" r="18"/>
+    <!-- Body leaning forward -->
+    <path d="M83 45 L60 95 L95 95 L110 130 L145 115 L135 100 L107 112 L90 80 L112 60 Z"/>
+    <!-- Wheel -->
+    <circle cx="78" cy="155" r="38" fill="none" stroke="#009edb" stroke-width="12"/>
+    <!-- Small wheel connector -->
+    <line x1="78" y1="117" x2="78" y2="155" stroke="#009edb" stroke-width="10"/>
+    <!-- Arm reaching forward -->
+    <path d="M95 65 Q130 50 148 38" stroke="#009edb" stroke-width="10" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>
