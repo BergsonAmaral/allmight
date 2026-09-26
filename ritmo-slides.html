@@ -53,21 +53,27 @@ h2{font-family:'Fraunces',serif;font-weight:900;line-height:1.04}
 #s03{background:#fff}
 #s03 .left{position:absolute;left:0;top:0;width:580px;height:720px;display:grid;grid-template-rows:1fr 1fr;gap:0}
 #s03 .left img{width:580px;height:360px}
-#s03 .right{position:absolute;right:0;top:0;width:700px;height:720px;padding:32px 48px 32px 44px;display:flex;flex-direction:column;justify-content:center;border-left:2px solid var(--line)}
-#s03 .right p{font-size:.9rem;color:#4a4036;line-height:1.7;margin-bottom:16px}
-#s03 .right blockquote{font-size:.85rem;font-style:italic;color:#6b5f50;border-left:3px solid var(--red);padding-left:16px;line-height:1.55}
-#s03 .partner-logos{display:flex;flex-direction:column;gap:10px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+#s03 .right{position:absolute;right:0;top:0;width:700px;height:720px;padding:28px 48px 28px 44px;display:flex;flex-direction:column;justify-content:center;border-left:2px solid var(--line)}
+#s03 .right p{font-size:.88rem;color:#4a4036;line-height:1.65;margin-bottom:12px}
+#s03 .right blockquote{font-size:.8rem;font-style:italic;color:#6b5f50;border-left:3px solid var(--red);padding-left:14px;line-height:1.5}
+#s03 .partner-logos{display:flex;flex-direction:column;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
 #s03 .partner-label{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--red)}
-#s03 .partner-imgs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;width:100%}
-#s03 .partner-imgs img{height:240px;width:100%;object-fit:contain}
+#s03 .partner-imgs{display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:10px;width:100%}
+#s03 .partner-imgs img{height:140px;width:100%;object-fit:contain;background:#f5f0e8;border-radius:10px;padding:12px;border:1.5px solid var(--line)}
 
 /* ─── SLIDE MUNDO ─── */
-#s_world{background:var(--ink);color:var(--paper);padding:38px 60px 32px;display:flex;flex-direction:column}
-#s_world .world-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;flex:1;margin-top:16px}
-.w-card{background:rgba(246,239,227,.05);border:1.5px solid rgba(246,239,227,.1);border-radius:12px;padding:16px 16px;display:flex;gap:13px;align-items:flex-start}
-.w-flag{font-size:2.4rem;line-height:1.1;flex-shrink:0}
-.w-txt strong{display:block;font-size:1.05rem;font-weight:700;color:var(--amber);margin-bottom:6px;line-height:1.2}
-.w-txt span{font-size:.93rem;color:#cfc4b0;line-height:1.4}
+#s_world{background:var(--ink);color:var(--paper);padding:32px 56px 28px;display:flex;flex-direction:column}
+#s_world .world-header{margin-bottom:14px}
+#s_world .world-sub{font-size:.78rem;color:#9c8878;max-width:90ch;margin-top:8px;line-height:1.5}
+#s_world .world-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;flex:1}
+.w-card{background:rgba(246,239,227,.06);border:1.5px solid rgba(246,239,227,.12);border-radius:12px;padding:14px 16px 14px 14px;display:flex;flex-direction:column;gap:8px;position:relative}
+.w-card-top{display:flex;align-items:center;gap:10px}
+.w-flag{font-size:2.2rem;line-height:1;flex-shrink:0}
+.w-country{font-size:.78rem;font-weight:700;color:var(--paper);letter-spacing:.01em}
+.w-tradition{font-size:1.0rem;font-weight:700;color:var(--amber);line-height:1.2;margin-bottom:2px}
+.w-link{display:flex;align-items:center;gap:6px;font-size:.62rem;font-family:'JetBrains Mono',monospace;color:var(--red);letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+.w-link::before{content:'';width:16px;height:1.5px;background:var(--red);flex-shrink:0}
+.w-desc{font-size:.78rem;color:#b5a896;line-height:1.4}
 
 /* ─── SLIDE 04 PARCEIROS ─── */
 #s04{background:var(--p2)}
@@ -274,45 +280,76 @@ h2{font-family:'Fraunces',serif;font-weight:900;line-height:1.04}
 
 <!-- 04 TRADIÇÕES MUNDIAIS -->
 <div class="slide dark" id="s_world">
-  <p class="kicker">Diálogo com o mundo</p>
-  <h2 style="font-size:1.85rem;color:var(--paper);margin-top:6px">O cordel não está sozinho — outras culturas também preservam o popular.</h2>
+  <div class="world-header">
+    <p class="kicker">Diálogo com o mundo</p>
+    <h2 style="font-size:1.7rem;color:var(--paper);margin-top:4px;line-height:1.15">O cordel não está sozinho — o mundo inteiro tem sua versão de poesia popular.</h2>
+    <p class="world-sub">Em cada cultura, um formato diferente com o mesmo espírito: história contada para o povo, de geração em geração.</p>
+  </div>
   <div class="world-grid">
+
     <div class="w-card">
-      <div class="w-flag">🇯🇵</div>
-      <div class="w-txt"><strong>Japão — Haicai (Haiku)</strong><span>Poesia breve ligada à natureza e às estações. O RITMO poderia entregar pequenos haicais impressos.</span></div>
+      <div class="w-card-top"><div class="w-flag">🇯🇵</div><div class="w-country">Japão</div></div>
+      <div class="w-tradition">Haiku (俳句)</div>
+      <div class="w-link">como o cordel</div>
+      <div class="w-desc">Poesia popular breve, impressa e distribuída em papel para o povo — brevidade com alma.</div>
     </div>
+
     <div class="w-card">
-      <div class="w-flag">🇲🇽</div>
-      <div class="w-txt"><strong>México — Calaveritas literarias</strong><span>Versos satíricos associados ao Día de Muertos, entregues em pequenos impressos ilustrados.</span></div>
+      <div class="w-card-top"><div class="w-flag">🇲🇽</div><div class="w-country">México</div></div>
+      <div class="w-tradition">Calaveritas literarias</div>
+      <div class="w-link">como o cordel</div>
+      <div class="w-desc">Versos satíricos impressos em pequenos folhetos ilustrados — poesia popular de distribuição física.</div>
     </div>
+
     <div class="w-card">
-      <div class="w-flag">🇪🇸</div>
-      <div class="w-txt"><strong>Espanha — Romances de ciego</strong><span>Narrativas em verso difundidas oralmente e por folhetos impressos — tradição histórica popular.</span></div>
+      <div class="w-card-top"><div class="w-flag">🇪🇸</div><div class="w-country">Espanha</div></div>
+      <div class="w-tradition">Romances de ciego</div>
+      <div class="w-link">como o cordel</div>
+      <div class="w-desc">Narrativas em verso vendidas em folhetos impressos nas ruas — a mesma lógica do folheto popular.</div>
     </div>
+
     <div class="w-card">
-      <div class="w-flag">🇵🇹</div>
-      <div class="w-txt"><strong>Portugal — Cordel português</strong><span>Folhetos populares históricos pendurados em cordéis — tradição paralela ao cordel nordestino.</span></div>
+      <div class="w-card-top"><div class="w-flag">🇵🇹</div><div class="w-country">Portugal</div></div>
+      <div class="w-tradition">Cordel português</div>
+      <div class="w-link">origem do nome</div>
+      <div class="w-desc">Folhetos históricos pendurados em cordéis nas feiras — o nome que atravessou o Atlântico.</div>
     </div>
+
     <div class="w-card">
-      <div class="w-flag">🇮🇳</div>
-      <div class="w-txt"><strong>Índia — Patua / Patachitra</strong><span>Pinturas narrativas em rolos contadas com canto pelos artistas Patua de Bengala.</span></div>
+      <div class="w-card-top"><div class="w-flag">🇮🇳</div><div class="w-country">Índia</div></div>
+      <div class="w-tradition">Patua / Patachitra</div>
+      <div class="w-link">como o cordel</div>
+      <div class="w-desc">Narrativa visual em rolos cantada para o público — arte popular passada de geração em geração.</div>
     </div>
+
     <div class="w-card">
-      <div class="w-flag">🇮🇩</div>
-      <div class="w-txt"><strong>Indonésia — Wayang</strong><span>Teatro de marionetes que transmite histórias e valores culturais entre gerações.</span></div>
+      <div class="w-card-top"><div class="w-flag">🇮🇩</div><div class="w-country">Indonésia</div></div>
+      <div class="w-tradition">Wayang (teatro de sombras)</div>
+      <div class="w-link">como o cordel</div>
+      <div class="w-desc">Histórias e valores culturais transmitidos ao povo por meio da arte — tradição viva e comunitária.</div>
     </div>
+
     <div class="w-card">
-      <div class="w-flag">🇹🇷</div>
-      <div class="w-txt"><strong>Turquia — Karagöz</strong><span>Teatro de sombras tradicional com personagens e narrativas populares transmitidas oralmente.</span></div>
+      <div class="w-card-top"><div class="w-flag">🇹🇷</div><div class="w-country">Turquia</div></div>
+      <div class="w-tradition">Karagöz</div>
+      <div class="w-link">como o cordel</div>
+      <div class="w-desc">Personagens populares em narrativas cômicas e satíricas — folclore acessível e passado oralmente.</div>
     </div>
+
     <div class="w-card">
-      <div class="w-flag">🇰🇷</div>
-      <div class="w-txt"><strong>Coreia — Pansori</strong><span>Tradição narrativa musical: histórias apresentadas por meio do canto e da interpretação ao vivo.</span></div>
+      <div class="w-card-top"><div class="w-flag">🇰🇷</div><div class="w-country">Coreia</div></div>
+      <div class="w-tradition">Pansori (판소리)</div>
+      <div class="w-link">como o cordel</div>
+      <div class="w-desc">História cantada ao vivo para um público popular — emoção, ritmo e narrativa popular combinados.</div>
     </div>
+
     <div class="w-card">
-      <div class="w-flag">🇬🇧</div>
-      <div class="w-txt"><strong>Reino Unido — Ballads tradicionais</strong><span>Canções narrativas que preservam histórias transmitidas entre gerações pela tradição oral.</span></div>
+      <div class="w-card-top"><div class="w-flag">🇬🇧</div><div class="w-country">Reino Unido</div></div>
+      <div class="w-tradition">Ballads tradicionais</div>
+      <div class="w-link">como o cordel</div>
+      <div class="w-desc">Canções narrativas passadas entre gerações — histórias do povo contadas em forma de verso.</div>
     </div>
+
   </div>
   <span class="snum">04 / 14</span>
 </div>
